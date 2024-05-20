@@ -7,16 +7,15 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
-
 jobs:
     Testing:
       runs-on: ubuntu-latest
       steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.10
+          python-version: '3.10' 
       - name: Add conda to system path
         run: |
           # $CONDA is an environment variable pointing to the root of the miniconda directory
@@ -30,4 +29,5 @@ jobs:
       - run: echo "Finish installing snakemake"
       - name: Run snakemake
         run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
-          
+
+
