@@ -36,11 +36,11 @@ reference:
   stargenomedir:
     GRCh38.primary_assembly.genome: $refdir/GRCh38.primary_assembly.genome
   fasta:
-    GRCh38.primary_assembly.genome: $refdir/chr7.fa.gz
+    GRCh38.primary_assembly.genome: $refdir/gene.fa
   fasta_salmon:
     GRCh38.primary_assembly.genome: $refdir/gencode.v46.transcripts.fa
   gtf:
-    GRCh38.primary_assembly.genome: $refdir/chr7.gtf
+    GRCh38.primary_assembly.genome: $refdir/gene.gtf
   gtf_personal:
     GRCh38.primary_assembly.genome: $workflow/GRCh38.primary_assembly.genome.gtf
 
