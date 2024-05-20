@@ -28,6 +28,6 @@ jobs:
           mamba install -c conda-forge -c bioconda snakemake
       - run: echo "Finish installing snakemake"
       - name: Run snakemake
-        run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
+        run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 6 -k
 
 
