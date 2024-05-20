@@ -1,0 +1,39 @@
+name: stringtie
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=5.1=1_gnu
+  - bzip2=1.0.8=h7b6447c_0
+  - c-ares=1.18.1=h7f8727e_0
+  - ca-certificates=2022.10.11=h06a4308_0
+  - certifi=2022.9.24=py310h06a4308_0
+  - htslib=1.12=h9093b5e_1
+  - krb5=1.19.2=hac12032_0
+  - ld_impl_linux-64=2.38=h1181459_1
+  - libcurl=7.85.0=h91b91d3_0
+  - libdeflate=1.7=h27cfd23_5
+  - libedit=3.1.20210910=h7f8727e_0
+  - libev=4.33=h7f8727e_1
+  - libffi=3.3=he6710b0_2
+  - libgcc-ng=11.2.0=h1234567_1
+  - libgomp=11.2.0=h1234567_1
+  - libnghttp2=1.46.0=hce63b2e_0
+  - libssh2=1.10.0=h8f2d780_0
+  - libstdcxx-ng=11.2.0=h1234567_1
+  - libuuid=1.0.3=h7f8727e_2
+  - ncurses=6.3=h5eee18b_3
+  - openssl=1.1.1q=h7f8727e_0
+  - pip=22.2.2=py310h06a4308_0
+  - python=3.10.6=haa1d7c7_1
+  - readline=8.2=h5eee18b_0
+  - setuptools=65.5.0=py310h06a4308_0
+  - sqlite=3.39.3=h5082296_0
+  - stringtie=2.2.1=h3198e80_0
+  - tk=8.6.12=h1ccaba5_0
+  - tzdata=2022f=h04d1e81_0
+  - wheel=0.37.1=pyhd3eb1b0_0
+  - xz=5.2.6=h5eee18b_0
+  - zlib=1.2.13=h5eee18b_0
+prefix: /CTGlab/home/maurizio/miniconda3/envs/stringtie

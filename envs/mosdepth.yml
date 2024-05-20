@@ -1,0 +1,7 @@
+name: mosdepth
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - mosdepth=0.3.3=hdfd78af_1
+prefix: /CTGlab/home/maurizio/miniconda3/envs/mosdepth

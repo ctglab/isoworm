@@ -1,0 +1,69 @@
+# options
+workflow_type: "custom_module"  # Options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules"
+freeze: GRCh38.primary_assembly.genome      # genome version
+
+############################################################
+# top level directories
+sourcedir: results # your output directory
+refdir:    test_data  # your gtf fasta and all reference files directory
+sampledir: test_data # your txt samples files directory
+envsdir:   envs #  your envs files directory
+workflow:  workflow # your workflow (.smk) files directory
+############################################################
+
+# software, binaries or tools
+tools:
+  ffq: ffq
+  fastp: fastp
+  bedtools: bedtools
+  samtools: samtools
+  star: STAR
+  stringtie: stringtie
+  salmon: salmon
+
+# conda envs
+conda:
+  ffq: $envsdir/ffp_env.yml
+  fastp: $envsdir/fastp.yml
+  bedtools: $envsdir/bedtools.yml
+  Samtools: $envsdir/Samtools.yaml
+  STAR: $envsdir/STAR.yml
+  stringtie: $envsdir/stringtie.yml
+  salmon: $envsdir/salmon.yml
+
+# reference files, genome indices and data
+reference:
+  stargenomedir:
+    GRCh38.primary_assembly.genome: $refdir/GRCh38.primary_assembly.genome
+  fasta:
+    GRCh38.primary_assembly.genome: $refdir/chr7.fa.gz
+  fasta_salmon:
+    GRCh38.primary_assembly.genome: $refdir/gencode.v46.transcripts.fa
+  gtf:
+    GRCh38.primary_assembly.genome: $refdir/chr7.gtf
+  gtf_personal:
+    GRCh38.primary_assembly.genome: $workflow/GRCh38.primary_assembly.genome.gtf
+
+# directory structure for input and output files
+datadirs:
+  samples: $sampledir/lung_geo.txt  ### your samples here! 
+  benchmarks: $sourcedir/benchmarks
+  stringtie: $sourcedir/stringtie
+  ballgown: $sourcedir/ballgown
+  fastq: $sourcedir/fastq
+  salmon_index: $refdir
+  sam: $sampledir/sam
+  bam: $sourcedir/bam
+  small_bam: $sourcedir/small_bam
+  stringtie_complete: $sourcedir/stringtie_complete
+  gene_expression: $sourcedir/gene_expression
+  salmon: $sourcedir/salmon
+  r: $workflow/R/
+
+# scripts
+scripts:
+  bash: $workflow/util/script.sh
+  gentrome_sh: $workflow/util/gentrome_salmon.sh
+  r_custom: $workflow/R/R_custom.R
+  r_salmon: $workflow/R/R_salmon.R
+  r_polya:  $workflow/R/polyA.R
