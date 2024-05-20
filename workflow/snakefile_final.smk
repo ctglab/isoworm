@@ -80,6 +80,7 @@ rule STAR_index:
         'mkdir {output.genomedir} && '
         '{params.star} --runThreadN {threads} '
         '--runMode genomeGenerate '
+        '--readFilesCommand zcat '
         '--genomeDir {output.genomedir} '
         '--genomeFastaFiles {input.fasta} '
         '--sjdbGTFfile {input.gtf} '
