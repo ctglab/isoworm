@@ -1,3 +1,4 @@
+![Formatting and Linting](https://github.com/mspodda/isoworm/workflows/Format%20and%20Linting/badge.svg)
 ![Testing](https://github.com/mspodda/isoworm/workflows/Testing/badge.svg)
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.1.0-brightgreen.svg)](https://snakemake.github.io)
 
