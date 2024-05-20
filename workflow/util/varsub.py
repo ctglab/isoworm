@@ -81,8 +81,8 @@ def varsub(ys, v = True):
            print(warns[k], file=sys.stderr)
 
 def __scan4vars(ys, obj, key):
-    pat = re.compile('\${?([\w\d]+)}?')
-    full = re.compile('\${?([\w\d]+)}?$')
+    pat = re.compile('\\${?([\\w\\d]+)}?')
+    full = re.compile('\\${?([\\w\\d]+)}?$')
     ps = {}
     hit = 0
     for m in re.findall(pat, obj[key]):
@@ -99,7 +99,7 @@ def __scan4vars(ys, obj, key):
             for k in ps.keys():
                 if k in ys:
                     #if not isinstance(ys[k], (list, dict, tuple, complex)):
-                    p = '\${?%s}?' % k
+                    p = '\\${?%s}? ' % k
                     if isinstance(ys[k], str):
                        obj[key] = re.sub(p, ys[k], obj[key])
                        hit = 1
