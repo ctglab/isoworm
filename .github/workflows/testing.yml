@@ -32,6 +32,6 @@ jobs:
            wget -O test_data/gencode.v46.primary_assembly.basic.annotation.gtf.gz  https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/gencode.v46.primary_assembly.basic.annotation.gtf.gz 
            wget -O test_data/GRCh38.primary_assembly.genome.fa.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh38.primary_assembly.genome.fa.gz 
       - name: Run snakemake
-        run: snakemake -s snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k -np
+        run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k -np
 
 
