@@ -34,14 +34,14 @@ group.colors_plot <- c()
 group.colors_pie_chart <- c()
 
 ## directories
-txt_samples <- "/Volumes/Extreme_SSD/data_snakemake"
-results_dir <- "/Volumes/Extreme_SSD/snakemake/results"
+txt_samples <- "../test_data"
+results_dir <- "../results"
 polyA_bam_dir <- ""
-final_output <- "/Volumes/Extreme_SSD/snakemake/R"
+final_output <- "R"
 ## total salmon
-indexDir <-file.path("/Volumes/Extreme_SSD/data_snakemake/salmon_index_v43/")
-fasta <- file.path("/Volumes/Extreme_SSD/data_snakemake/salmon_index_v43/GRCh38.primary_assembly.genome.fa")
-gtf   <- file.path("/Volumes/Extreme_SSD/data_snakemake/salmon_index_v43/GRCh38.primary_assembly.genome.gtf")
+indexDir <-file.path("../results/salmon_index_v43/")
+fasta <- file.path("../results/salmon_index_v43/")
+gtf   <- file.path("../results/salmon_index_v43/")
 
 ## functions
 data_summary <- function(x) {
