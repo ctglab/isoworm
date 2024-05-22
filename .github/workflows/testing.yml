@@ -27,13 +27,6 @@ jobs:
         run: |
           mamba install -c conda-forge -c bioconda snakemake
       - run: echo "Finish installing snakemake"
-      - name: Download files with wget
-        run: |
-           wget -O test_data/gencode.v46.primary_assembly.annotation.gtf.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/gencode.v46.primary_assembly.annotation.gtf.gz
-      - name: unzip the files
-        run: |
-           gzip -d test_data/gencode.v46.primary_assembly.annotation.gtf.gz
-           ls test_data/
       - name: Run snakemake
         run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
 
