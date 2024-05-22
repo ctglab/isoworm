@@ -69,7 +69,7 @@ rule STAR_index:
         fasta = config['reference']['fasta'][freeze],
         gtf   = config['reference']['gtf'][freeze]
     output:
-        genomedir = config['reference']['stargenomedir'][freeze],
+        directory(config['reference']['stargenomedir'][freeze])
         starindex = config['reference']['stargenomedir'][freeze] + "/" + "SAindex"
     params:
         star = config['tools']['star'],
@@ -77,13 +77,13 @@ rule STAR_index:
         config['conda']['STAR']
     threads: 2
     shell:
-        'mkdir {output.genomedir} && '
         '{params.star} --runThreadN {threads} '
         '--runMode genomeGenerate '
-        '--genomeDir {output.genomedir} '
+        '--genomeDir {output} '
         '--genomeFastaFiles {input.fasta} '
         '--sjdbGTFfile {input.gtf} '
-        '--sjdbOverhang 100 '
+        '--sjdbOverhang 100'
+
 
 ## create salmon gentrome
 rule salmon_gentrome:
