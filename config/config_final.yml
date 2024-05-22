@@ -38,9 +38,9 @@ reference:
   fasta:
     GRCh38.primary_assembly.genome: $refdir/GRCh38.primary_assembly.genome.fa
   fasta_salmon:
-    GRCh38.primary_assembly.genome: $refdir/gencode.v46.transcripts.fa
+    GRCh38.primary_assembly.genome: $refdir/gene.fa
   gtf:
-    GRCh38.primary_assembly.genome: $refdir/gencode.v46.primary_assembly.basic.annotation.gtf
+    GRCh38.primary_assembly.genome: $refdir/gene.gtf
   gtf_personal:
     GRCh38.primary_assembly.genome: $workflow/GRCh38.primary_assembly.genome.gtf
 
