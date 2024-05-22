@@ -31,6 +31,8 @@ jobs:
         run: |
            wget -O test_data/GRCh38.primary_assembly.genome.fa.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/GRCh38.primary_assembly.genome.fa.gz
            wget -O test_data/gencode.v46.primary_assembly.annotation.gtf.gz https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_46/gencode.v46.primary_assembly.annotation.gtf.gz
+      - name: unzip the files
+        run: |
            gzip -d test_data/gencode.v46.primary_assembly.annotation.gtf.gz
            gzip -d test_data/GRCh38.primary_assembly.genome.fa.gz
       - name: Run snakemake
