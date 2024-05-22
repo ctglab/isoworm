@@ -77,6 +77,7 @@ rule STAR_index:
         config['conda']['STAR']
     threads: 2
     shell:
+        'cd {output.genomedir} && '
         '{params.star} --runThreadN {threads} '
         '--runMode genomeGenerate '
         '--genomeDir {output.genomedir} '
