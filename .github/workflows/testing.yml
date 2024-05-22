@@ -27,6 +27,9 @@ jobs:
         run: |
           mamba install -c conda-forge -c bioconda snakemake
       - run: echo "Finish installing snakemake"
+      - name: unzip the files
+        run: |
+           gzip -d test_data/chr7.fa.gz
       - name: Run snakemake
         run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
 
