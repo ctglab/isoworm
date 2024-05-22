@@ -34,14 +34,14 @@ group.colors_plot <- c()
 group.colors_pie_chart <- c()
 
 ## directories
-txt_samples <- "../test_data"
-results_dir <- "../results"
+txt_samples <- "../../test_data"
+results_dir <- "../../results"
 polyA_bam_dir <- ""
 final_output <- "R"
 ## total salmon
-indexDir <-file.path("../results/salmon_index_v43/")
-fasta <- file.path("../results/salmon_index_v43/")
-gtf   <- file.path("../results/salmon_index_v43/")
+indexDir <- file.path("../../results/salmon_index_v43/")
+fasta <- file.path("../../results/salmon_index_v43/")
+gtf   <- file.path("../../results/salmon_index_v43/")
 
 ## functions
 data_summary <- function(x) {

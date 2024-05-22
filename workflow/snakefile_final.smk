@@ -77,7 +77,6 @@ rule STAR_index:
         config['conda']['STAR']
     threads: 2
     shell:
-        'mkdir {output.genomedir} && '
         '{params.star} --runThreadN {threads} '
         '--runMode genomeGenerate '
         '--readFilesCommand zcat '
