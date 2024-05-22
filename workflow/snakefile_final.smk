@@ -69,7 +69,7 @@ rule STAR_index:
         fasta = config['reference']['fasta'][freeze],
         gtf   = config['reference']['gtf'][freeze]
     output:
-        directory(config['reference']['stargenomedir'][freeze])
+        directory(config['reference']['stargenomedir'][freeze]),
         starindex = config['reference']['stargenomedir'][freeze] + "/" + "SAindex"
     params:
         star = config['tools']['star'],
