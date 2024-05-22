@@ -35,6 +35,7 @@ jobs:
         run: |
            gzip -d test_data/gencode.v46.primary_assembly.annotation.gtf.gz
            gzip -d test_data/GRCh38.primary_assembly.genome.fa.gz
+           ls test_data/
       - name: Run snakemake
         run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
 
