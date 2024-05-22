@@ -140,8 +140,8 @@ rule fastp:
         f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_1.fastq.gz",
         f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_2.fastq.gz"
     output:
-        f1_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R1.fq.gz"),
-        f2_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R2.fq.gz")
+        f1_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R1.fq"),
+        f2_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R2.fq")
     benchmark:
         config['datadirs']['benchmarks'] + "/{file}/" + "{file}_fastp.benchmark"
     params:
@@ -177,8 +177,8 @@ rule bam_to_fq:
 ## align the reads with star (PE-seq)
 rule STAR_align:
     input:
-        f1_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R1.fq.gz",
-        f2_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R2.fq.gz"
+        f1_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R1.fq",
+        f2_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R2.fq"
     output:
         bam = temp(config['datadirs']['bam'] +  "/{file}/"+ "{file}_Aligned.sortedByCoord.out.bam"),
         tab = config['datadirs']['bam'] +  "/{file}/"+ "{file}_SJ.out.tab"
