@@ -1,17 +1,17 @@
 ### Create and load vector of packages
 #setwd(final_output)
 source("workflow/R/config_all.R")
-new.packages <- my_packages[!(my_packages %in% installed.packages()[,"Package"])]
+new.packages <- my_packages_cran[!(my_packages_cran %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 # Load BiocManager
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 # Check and install missing packages
-missing_packages <- my_packages[!(my_packages %in% installed.packages()[,"Package"])]
+missing_packages <- my_packages_bioconductor[!(my_packages_bioconductor %in% installed.packages()[,"Package"])]
 if (length(missing_packages))
     BiocManager::install(missing_packages)
-lapply(my_packages, require, character.only = TRUE) 
-
+lapply(my_packages_cran, require, character.only = TRUE) 
+lapply(mmy_packages_bioconductor, require, character.only = TRUE) 
 ### Create a list with all txt files containing the samples for each tissues
 ### Extract all samples from the txt list files for each tissues
 setwd(txt_files_dir)
