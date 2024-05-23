@@ -19,10 +19,8 @@ files_results_dir <- list.dirs(results_dir, recursive = FALSE)
 all_results_dir   <- list.dirs(files_results_dir, recursive = FALSE)
 bam_samples       <- all_results_dir[grepl("/bam",all_results_dir, ignore.case = TRUE)]
 ballgown_samples       <- all_results_dir[grepl("/ballgown",all_results_dir, ignore.case = TRUE)]
-print(ballgown_samples)
-bam_directories <- bam_samples[sapply(bam_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
-print(bam_directories)
-ballgown_directories <- ballgown_samples[sapply(ballgown_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
+#bam_directories <- bam_samples[sapply(bam_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
+#ballgown_directories <- ballgown_samples[sapply(ballgown_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
 
 ## Create a list with all the total reads for each samples inside the results directory
 library_reads_number <- list()
@@ -30,7 +28,7 @@ for (y in 1:length(samples_files)){
   library_reads_number <- list()
   for (i in 1:length(samples_files[[y]])){
     for(j in samples_files[[y]][[i]]){
-      setwd(bam_directories[y])
+      setwd(bam_samples[y])
       current_sample <- j
       in.list <- list.files(path= j, recursive = T, full.names = T)
       library_reads  <- read.csv(in.list[1],sep="\t")[c(4),]
@@ -49,7 +47,7 @@ for (y in 1:length(samples_files)){
   read_count_ref <- list()
   for (i in 1:length(samples_files[[y]])){
     for(j in samples_files[[y]][[i]]){
-      setwd(ballgown_directories[y])
+      setwd(ballgown_samples[y])
       current_sample <- j
       in.list <- list.files(path= j, recursive = T, full.names = T)
       exons_data <- fread(in.list[1])
