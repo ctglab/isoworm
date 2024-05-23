@@ -37,7 +37,7 @@ group.colors_pie_chart <- c()
 txt_samples <- "test_data"
 results_dir <- "results"
 polyA_bam_dir <- ""
-final_output <- "R"
+final_output <- "workflow/R"
 ## total salmon
 indexDir <- file.path("results/salmon_index_v43/")
 fasta <- file.path("results/salmon_index_v43/")
