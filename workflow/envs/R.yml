@@ -5,7 +5,16 @@ channels:
   - nodefaults  ## block user/system channels
 dependencies:
   - r-base=4.2  ## always specify the R version (faster solve; more stable)
-  - r-essentials
   - bioconductor-GenomicAlignments
   - bioconductor-tximport
+  - bioconductor-tximeta
+  - r-dplyr
+  - r-ggplot2
+  - r-tidyr
+  - r-ggsignif
+  - r-ggpubr
+  - r-patchwork
+  - r-stringr
+  - r-ggrepel
   - r-tibble
+  - r-bedtoolsr
