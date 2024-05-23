@@ -31,6 +31,7 @@ for (y in 1:length(samples_files)){
       setwd(bam_samples[y])
       current_sample <- j
       in.list <- list.files(path= j, recursive = T, full.names = T)
+      print(in.list)
       library_reads  <- read.csv(in.list[1],sep="\t")[c(4),]
       library_reads_number <-  na.omit(append(library_reads_number,as.numeric(library_reads[2][,1])))
       assign(paste0(samples_typologies[y],"_reads_counts"), library_reads_number)
