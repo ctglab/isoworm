@@ -24,24 +24,24 @@ my_packages <- c("dplyr","ggplot2","tidyr","ggsignif","ggpubr","patchwork","stri
                  "ggrepel","bedtoolsr","tibble")
 
 ## Sample typologies
-samples_typologies <-  c("Lung")
+samples_typologies <-  c("lung_geo")
 
 ## Labels for the graphic 
-label_plots <- c("Lung")
+label_plots <- c("lung_geo")
 
 ## Colors for the graphics
 group.colors_plot <- c()
 group.colors_pie_chart <- c()
 
 ## directories
-txt_samples <- "test_data"
-results_dir <- "results"
+txt_samples <- "/home/runner/work/isoworm/isoworm/test_data"
+results_dir <- "/home/runner/work/isoworm/isoworm/results"
 polyA_bam_dir <- ""
-final_output <- "workflow/R"
+final_output <- "/home/runner/work/isoworm/isoworm/workflow/R"
 ## total salmon
-indexDir <- file.path("results/salmon_index_v43/")
-fasta <- file.path("results/salmon_index_v43/")
-gtf   <- file.path("results/salmon_index_v43/")
+indexDir <- file.path("/home/runner/work/isoworm/isoworm/results/salmon_index_v43/")
+fasta <- file.path("/home/runner/work/isoworm/isoworm/results/salmon_index_v43/")
+gtf   <- file.path("/home/runner/work/isoworm/isoworm/results/salmon_index_v43/")
 
 ## functions
 data_summary <- function(x) {

@@ -1,6 +1,6 @@
 ### Create and load vector of packages
 #setwd(final_output)
-source("workflow/R/config_all.R")
+source("/home/runner/work/isoworm/isoworm/workflow/R/config_all.R")
 lapply(my_packages, require, character.only = TRUE) 
 
 ### Create a list with all txt files containing the samples for each tissues
@@ -19,7 +19,9 @@ files_results_dir <- list.dirs(results_dir, recursive = FALSE)
 all_results_dir   <- list.dirs(files_results_dir, recursive = FALSE)
 bam_samples       <- all_results_dir[grepl("/bam",all_results_dir, ignore.case = TRUE)]
 ballgown_samples       <- all_results_dir[grepl("/ballgown",all_results_dir, ignore.case = TRUE)]
+print(ballgown_samples)
 bam_directories <- bam_samples[sapply(bam_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
+print(bam_directories)
 ballgown_directories <- ballgown_samples[sapply(ballgown_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
 
 ## Create a list with all the total reads for each samples inside the results directory
