@@ -1,5 +1,5 @@
 ### Create and load vector of packages
-setwd(final_output)
+#setwd(final_output)
 source("config_all.R")
 lapply(my_packages, require, character.only = TRUE) 
 
@@ -142,7 +142,7 @@ bp_ratios <- ggplot(db_ratio, aes(x=group, y=value, fill=group)) +
   xlab("Tissue Typology") 
 bp_ratios
 # Closing the graphical device
-setwd(final_output)
+#setwd(final_output)
 pdf("ratio_BRAF.pdf", width = 21.5,height = 11)
 bp_ratios
 dev.off() 
