@@ -5,7 +5,7 @@ lapply(my_packages, require, character.only = TRUE)
 
 ### Create a list with all txt files containing the samples for each tissues
 ### Extract all samples from the txt list files for each tissues
-setwd(txt_files_dir)
+setwd(txt_samples)
 txt_files      <- list()
 samples_files  <- list()
 count = 1
