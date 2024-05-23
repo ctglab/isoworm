@@ -8,4 +8,4 @@ dependencies:
   - r-essentials
   - bioconductor-GenomicAlignments
   - bioconductor-tximport
-  - bioconductor-tibble
+  - r-tibble
