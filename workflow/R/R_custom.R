@@ -3,6 +3,13 @@
 source("workflow//config_all.R")
 new.packages <- my_packages[!(my_packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
+# Load BiocManager
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+# Check and install missing packages
+missing_packages <- my_packages[!(my_packages %in% installed.packages()[,"Package"])]
+if (length(missing_packages))
+    BiocManager::install(missing_packages)
 lapply(my_packages, require, character.only = TRUE) 
 
 ### Create a list with all txt files containing the samples for each tissues
