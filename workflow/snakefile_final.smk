@@ -425,4 +425,4 @@ rule salmon_r_script:
         piecharts_salmon = config['datadirs']['r'] + "pie_charts.pdf",
         total_salmon = config['datadirs']['r'] + "total_salmon.pdf"
     shell:
-        "Rscript {params.r_salmon} | ls"
+        "Rscript {params.r_salmon}"
