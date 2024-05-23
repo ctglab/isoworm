@@ -402,8 +402,8 @@ rule polyA_r_script:
     output:
         polyA_204 = config['datadirs']['r'] + "polyA_filtered_3UTR204.csv",
         polyA_220 = config['datadirs']['r'] + "polyA_filtered_3UTR220.csv"
-    script:
-        "{params.r_polya}"
+    shell:
+        "Rscript {params.r_polya}"
 
 ## Plot the ratio boxplot
 rule custom_r_script:
@@ -412,8 +412,8 @@ rule custom_r_script:
         r_custom = config['scripts']['r_custom']
     output:
         boxplot_custom = config['datadirs']['r'] + "ratio_BRAF.pdf"
-    script:
-        "{params.r_custom}"
+    shell:
+        "Rscript {params.r_custom}"
 
 ## Plot the pie charts and the ratio boxplot
 rule salmon_r_script:
@@ -424,5 +424,5 @@ rule salmon_r_script:
         boxplot_salmon = config['datadirs']['r'] + "ratio_salmon.pdf",
         piecharts_salmon = config['datadirs']['r'] + "pie_charts.pdf",
         total_salmon = config['datadirs']['r'] + "total_salmon.pdf"
-    script:
-        "{params.r_salmon}"
+    shell:
+        "Rscript {params.r_salmon}"
