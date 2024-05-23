@@ -20,9 +20,8 @@ BRAF_ids <- c("ENST00000288602.11","ENST00000469930.2","ENST00000479537.6","ENST
               "ENST00000647434.1")
 
 ## libraries
-my_packages_cran <- c("dplyr","ggplot2","tidyr","ggsignif","ggpubr","patchwork","stringr","ggrepel","tibble")
-my_packages_bioconductor <- c("GenomicAlignments","tximport","tximeta")
-my_packages_github <- c("bedtoolsr")
+my_packages <- c("dplyr","ggplot2","tidyr","ggsignif","ggpubr","patchwork","stringr",
+                 "ggrepel","GenomicAlignments","bedtoolsr","tximport","tximeta","tibble")
 
 ## Sample typologies
 samples_typologies <-  c("Lung")

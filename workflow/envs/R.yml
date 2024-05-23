@@ -1,0 +1,11 @@
+name: my_r_env
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults  ## block user/system channels
+dependencies:
+  - r-base=4.2  ## always specify the R version (faster solve; more stable)
+  - r-essentials
+  - bioconductor-GenomicAlignments
+  - bioconductor-tximport
+  - bioconductor-tibble

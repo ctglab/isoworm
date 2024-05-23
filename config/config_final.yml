@@ -30,6 +30,7 @@ conda:
   STAR: $envsdir/STAR.yml
   stringtie: $envsdir/stringtie.yml
   salmon: $envsdir/salmon.yml
+  r: $envsdir/R.yml
 
 # reference files, genome indices and data
 reference:
