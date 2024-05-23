@@ -1,7 +1,6 @@
 ### Create and load vector of packages
 #setwd(final_output)
-getwd()
-source("config_all.R")
+source("workflow/R/config_all.R")
 new.packages <- my_packages[!(my_packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 # Load BiocManager
