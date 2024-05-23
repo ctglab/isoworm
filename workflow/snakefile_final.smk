@@ -402,8 +402,6 @@ rule polyA_r_script:
     output:
         polyA_204 = config['datadirs']['r'] + "polyA_filtered_3UTR204.csv",
         polyA_220 = config['datadirs']['r'] + "polyA_filtered_3UTR220.csv"
-    conda:
-        config['conda']['r']
     shell:
         "Rscript {params.r_polya}"
 
@@ -414,8 +412,6 @@ rule custom_r_script:
         r_custom = config['scripts']['r_custom']
     output:
         boxplot_custom = config['datadirs']['r'] + "ratio_BRAF.pdf"
-    conda:
-        config['conda']['r']
     shell:
         "Rscript {params.r_custom}"
 
@@ -428,7 +424,5 @@ rule salmon_r_script:
         boxplot_salmon = config['datadirs']['r'] + "ratio_salmon.pdf",
         piecharts_salmon = config['datadirs']['r'] + "pie_charts.pdf",
         total_salmon = config['datadirs']['r'] + "total_salmon.pdf"
-    conda:
-        config['conda']['r']
     shell:
         "Rscript {params.r_salmon}"

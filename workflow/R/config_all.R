@@ -20,7 +20,22 @@ BRAF_ids <- c("ENST00000288602.11","ENST00000469930.2","ENST00000479537.6","ENST
               "ENST00000647434.1")
 
 ## libraries
-my_packages <- c("dplyr","ggplot2","tidyr","ggsignif","ggpubr","patchwork","stringr",
+my_packages <- list(
+  "dplyr",
+  "ggplot2",
+  list(package = "tidyr", source = "cran"),
+  list(package = "ggsignif", source = "cran"),
+  list(package = "ggpubr", source = "cran"),
+  list(package = "patchwork", source = "cran"),
+  list(package = "stringr", source = "cran"),
+  list(package = "ggrepel", source = "cran"),
+  list(package = "GenomicAlignments", source = "bioconductor"),
+  list(package = "bedtoolsr", source = "github:nanxstats/bedtoolsr"),
+  list(package = "tximport", source = "bioconductor"),
+  list(package = "tximeta", source = "bioconductor"),
+  list(package = "tibble", source = "cran"))
+
+my_packages_2 <- c("dplyr","ggplot2","tidyr","ggsignif","ggpubr","patchwork","stringr",
                  "ggrepel","GenomicAlignments","bedtoolsr","tximport","tximeta","tibble")
 
 ## Sample typologies
@@ -76,4 +91,45 @@ divide_in_sottoliste <- function(lst) {
 ## merge target
 merge_by_target_id <- function(df1, df2) {
   return(merge(df1, df2, by="Name", all = TRUE))
+}
+
+install_if_not_present <- function(packages) {
+  install_from_cran <- function(pkg) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      install.packages(pkg)
+    }
+  }
+  
+  install_from_bioconductor <- function(pkg) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      if (!requireNamespace("BiocManager", quietly = TRUE)) {
+        install.packages("BiocManager")
+      }
+      BiocManager::install(pkg)
+    }
+  }
+  
+  install_from_github <- function(repo) {
+    pkg <- tools::file_path_sans_ext(basename(repo))
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes")
+      }
+      remotes::install_github(repo)
+    }
+  }
+  
+  for (pkg_info in packages) {
+    if (is.character(pkg_info)) {
+      install_from_cran(pkg_info)
+    } else if (is.list(pkg_info)) {
+      pkg <- pkg_info$package
+      source <- pkg_info$source
+      if (source == "bioconductor") {
+        install_from_bioconductor(pkg)
+      } else if (source == "github") {
+        install_from_github(pkg)
+      }
+    }
+  }
 }

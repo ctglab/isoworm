@@ -1,7 +1,8 @@
 ### Create and load vector of packages
 #setwd(final_output)
 source("workflow/R/config_all.R")
-lapply(my_packages, require, character.only = TRUE) 
+install_if_not_present(my_packages)
+lapply(my_packages_2, require, character.only = TRUE) 
 
 ### Create a list with all txt files containing the samples for each tissues
 ### Extract all samples from the txt list files for each tissues
