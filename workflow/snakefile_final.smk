@@ -83,6 +83,7 @@ rule STAR_index:
         '--genomeFastaFiles {input.fasta} '
         '--sjdbGTFfile {input.gtf} '
         '--sjdbOverhang 100'
+    priority: 100
 
 
 ## create salmon gentrome
@@ -202,6 +203,8 @@ rule STAR_align:
         '--outSAMattributes NH HI NM MD AS nM jM jI XS '
         '--outBAMsortingBinsN 100 '
         '--winAnchorMultimapNmax 100 '
+    priority: 50
+
 
 ## zip the tabs files to save space
 rule zip_tabs:
