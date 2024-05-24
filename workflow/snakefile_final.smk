@@ -97,6 +97,7 @@ rule salmon_gentrome:
         params:
             gentrome_sh = config['scripts']['gentrome_sh'],
             outdir=config['refdir'] + "/salmon_index_v43/"
+        priority: 100
         shell:
             "sh {params.gentrome_sh} {input.fasta} {input.transcriptome_fasta} {params.outdir}"
 
@@ -112,6 +113,7 @@ rule salmon_index:
             decoys = config['refdir'] + "/salmon_index_v43/" + 'decoys.txt'
         conda:
             config['conda']['salmon']
+        priority: 80
         shell:
             """
             salmon index -t {input.gentrome} -i {params.outdir} \
@@ -291,6 +293,7 @@ rule salmon_quant:
         threads: 2
         conda:
             config['conda']['salmon']
+        priority: 60
         shell:
             """
             {params.salmon} quant -l {params.libtype} -i {params.salmon_index} -1 {input.f1} -2 {input.f2} -p {threads} -o {params.outdir_all_salmon}
