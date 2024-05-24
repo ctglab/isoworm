@@ -4,7 +4,7 @@ freeze: GRCh38.primary_assembly.genome      # genome version
 
 ############################################################
 # top level directories
-sourcedir: results # your output directory
+sourcedir: results/lung_geo # your output directory
 refdir:    test_data  # your gtf fasta and all reference files directory
 sampledir: test_data # your txt samples files directory
 envsdir:   envs #  your envs files directory

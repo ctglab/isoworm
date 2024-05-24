@@ -37,11 +37,11 @@ group.colors_pie_chart <- c()
 txt_samples <- "/home/runner/work/isoworm/isoworm/test_data"
 results_dir <- "/home/runner/work/isoworm/isoworm/results"
 polyA_bam_dir <- ""
-final_output <- "/home/runner/work/isoworm/isoworm/workflow/R"
+final_output <- "/home/runner/work/isoworm/isoworm/R"
 ## total salmon
-indexDir <- file.path("/home/runner/work/isoworm/isoworm/results/salmon_index_v43/")
-fasta <- file.path("/home/runner/work/isoworm/isoworm/results/salmon_index_v43/")
-gtf   <- file.path("/home/runner/work/isoworm/isoworm/results/salmon_index_v43/")
+indexDir <- file.path("")
+fasta <- file.path("")
+gtf   <- file.path("")
 
 ## functions
 data_summary <- function(x) {
