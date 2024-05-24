@@ -29,6 +29,7 @@ for (y in 1:length(samples_files)){
   for (i in 1:length(samples_files[[y]])){
     for(j in samples_files[[y]][[i]]){
       setwd(bam_samples[y])
+      setwd("../")
       current_sample <- j
       print(j)
       in.list <- list.files(path= j, recursive = T, full.names = T)
