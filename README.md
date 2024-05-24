@@ -65,7 +65,7 @@ git clone https://github.com/ctglab/isoworm
 
 ### Usage
 
-Edit `config.yml` to set the input datasets and parameters, edit `config.R` to set the input datasets and parameters for R and edit `script.sh` with the directory where download your fastq, then issue:
+Edit `config.yml` to set the input datasets and parameters, edit `config.R` to set the input datasets and parameters for R and edit `script.sh` with the directory where you want to download your fastqs, then issue:
 ```bash
 snakemake -s snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
 ```
