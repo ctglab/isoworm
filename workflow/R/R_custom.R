@@ -117,7 +117,7 @@ count2 = tissues_numbers[1]
 for (i in 1:length(label_plots)){
   db_ratio$group[count:count2] <- label_plots[i]
   db_ratio$IDS[count:count2] <- unlist(samples_files[[i]])
-  count  = tissues_numbers[i] + count
+  count = tissues_numbers[i] + count
   count2 = tissues_numbers[i+1] + count -1
 }
 
