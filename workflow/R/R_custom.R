@@ -1,5 +1,5 @@
 ### Create and load vector of packages
-source("/home/runner/work/isoworm/isoworm/R/config_all.R")
+source("config_all.R")
 lapply(my_packages, require, character.only = TRUE) 
 library(data.table)
 ### Create a list with all txt files containing the samples for each tissues
