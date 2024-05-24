@@ -1,6 +1,6 @@
-setwd(final_output)
 source("/home/runner/work/isoworm/isoworm/workflow/R/config_all.R")
 lapply(my_packages, require, character.only = TRUE)
+library(data.table)
 ### Create a list with all txt files containing the samples for each tissues line 
 ### Extract all samples from the txt list files for each tissues line typology  
 setwd(txt_samples)
@@ -83,7 +83,7 @@ db_ratio$group <- NA
 db_ratio$IDS   <- NA
 tissues_numbers  <- c()
 for (i in 1:length(samples_typologies)){
-  tissues_numbers  <- c(tissues_numbers,as.integer(count(get(paste0(samples_typologies[i],"_BRAF_results")))))
+  tissues_numbers  <- c(tissues_numbers,nrow(get(paste0(samples_typologies[i],"_BRAF_results"))))
 }
 
 count  = 1

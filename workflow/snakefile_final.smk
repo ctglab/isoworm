@@ -296,7 +296,7 @@ rule salmon_quant:
         priority: 60
         shell:
             """
-            {params.salmon} quant -l {params.libtype} -i {params.salmon_index} -1 {input.f1} -2 {input.f2} -p {threads} -o {params.outdir_all_salmon}
+            {params.salmon} quant --minAssignedFrags 9 -l {params.libtype} -i {params.salmon_index} -1 {input.f1} -2 {input.f2} -p {threads} -o {params.outdir_all_salmon}
             """
 
 
