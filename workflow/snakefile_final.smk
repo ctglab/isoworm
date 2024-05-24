@@ -425,7 +425,6 @@ rule custom_r_script:
 ## Plot the pie charts and the ratio boxplot
 rule salmon_r_script:
     input:
-        salmon_sf =  config['datadirs']['salmon'] + "/{file}/"  + 'quant.sf'
     params:
         r_salmon = config['scripts']['r_salmon']
     output:
