@@ -1,7 +1,6 @@
 setwd(final_output)
-source("config_all.R")
+source("/home/runner/work/isoworm/isoworm/workflow/R/config_all.R")
 lapply(my_packages, require, character.only = TRUE)
-
 ### Create a list with all txt files containing the samples for each tissues line 
 ### Extract all samples from the txt list files for each tissues line typology  
 setwd(txt_samples)
