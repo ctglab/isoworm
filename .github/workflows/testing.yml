@@ -36,6 +36,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: plot
-          path: /home/runner/work/isoworm/isoworm/R/ratio_BRAF.pdf
+          path: /home/runner/work/isoworm/isoworm/workflow/R/ratio_BRAF.pdf
 
 
