@@ -275,8 +275,8 @@ rule stringtie_count:
 
 rule salmon_quant:
         input:
-            f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_1.fastq.gz",
-            f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_2.fastq.gz",
+            f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_R1.fq",
+            f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_R2.fq",
         output:
             salmon_sf = config['datadirs']['salmon'] + "/{file}/"  + "quant.sf"
         params:
