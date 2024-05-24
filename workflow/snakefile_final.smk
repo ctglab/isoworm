@@ -91,7 +91,7 @@ rule STAR_index:
 rule salmon_gentrome:
         input:
             fasta = config['reference']['fasta'][freeze],
-            transcriptome_fasta = config['reference']['fasta'][freeze]
+            transcriptome_fasta = config['reference']['fasta_salmon'][freeze]
         output:
             temp(config['refdir'] + "/salmon_index_v43/" + 'gentrome.fa.gz')
         params:
