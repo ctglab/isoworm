@@ -21,7 +21,7 @@ bam_samples       <- all_results_dir[grepl("/bam",all_results_dir, ignore.case =
 ballgown_samples       <- all_results_dir[grepl("/ballgown",all_results_dir, ignore.case = TRUE)]
 #bam_directories <- bam_samples[sapply(bam_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
 #ballgown_directories <- ballgown_samples[sapply(ballgown_samples, function(x) any(grepl(paste(samples_typologies, collapse = "|"), x)))]
-
+print(bam_samples)
 ## Create a list with all the total reads for each samples inside the results directory
 library_reads_number <- list()
 for (y in 1:length(samples_files)){
@@ -30,6 +30,7 @@ for (y in 1:length(samples_files)){
     for(j in samples_files[[y]][[i]]){
       setwd(bam_samples[y])
       current_sample <- j
+      print(j)
       in.list <- list.files(path= j, recursive = T, full.names = T)
       print(in.list)
       library_reads  <- read.csv(in.list[1],sep="\t")[c(4),]
