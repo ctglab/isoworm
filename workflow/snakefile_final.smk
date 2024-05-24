@@ -433,6 +433,5 @@ rule salmon_r_script:
         total_salmon = config['datadirs']['r'] + "total_salmon.pdf"
     conda:
         config['conda']['r']
-    priority: 40
     shell:
         "Rscript {params.r_salmon}"
