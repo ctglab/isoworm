@@ -2,7 +2,7 @@
 #setwd(final_output)
 source("/home/runner/work/isoworm/isoworm/workflow/R/config_all.R")
 lapply(my_packages, require, character.only = TRUE) 
-
+library(data.table)
 ### Create a list with all txt files containing the samples for each tissues
 ### Extract all samples from the txt list files for each tissues
 setwd(txt_samples)
