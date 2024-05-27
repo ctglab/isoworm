@@ -5,7 +5,7 @@ channels:
   - nodefaults  ## block user/system channels
 dependencies:
   - r-base=4.2  ## always specify the R version (faster solve; more stable)
-  - r-dplyr
+  - r-dbplyr=2.3.4
   - r-ggplot2
   - r-tidyr
   - r-ggsignif
