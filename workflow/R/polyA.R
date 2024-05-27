@@ -10,7 +10,7 @@ for (i in samples_dir){
   setwd(i)
   in.list <- list.files(path= i, recursive = T, full.names = T)
   print(in.list)
-  j <- grep("_small_Aligned.sortedByCoord.out.bam$",in.list)
+  j <- grep("_Aligned.sortedByCoord.out.bam$",in.list)
   name <- paste0("quant_",gsub(".*/(SRR[0-9]+).*", "\\1",in.list[j]))
   gal <- readGAlignments(in.list[j])
   coverage <- coverage(gal)
