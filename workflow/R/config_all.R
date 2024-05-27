@@ -46,8 +46,8 @@ polyA_bam_dir <- ""
 final_output <- "/home/runner/work/isoworm/isoworm/workflow/R"
 ## total salmon
 indexDir <- file.path("/home/runner/work/isoworm/isoworm/test_data/salmon_index_v43")
-fasta <- file.path("/home/runner/work/isoworm/isoworm/test_data/chr7_transcripts.fa")
-gtf   <- file.path("/home/runner/work/isoworm/isoworm/test_data/chr7.gtf")
+fasta    <- file.path("/home/runner/work/isoworm/isoworm/test_data/chr7_transcripts.fa")
+gtf      <- file.path("/home/runner/work/isoworm/isoworm/test_data/chr7.gtf")
 
 ## functions
 data_summary <- function(x) {
