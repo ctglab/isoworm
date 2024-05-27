@@ -16,6 +16,7 @@ dependencies:
   - r-tibble
   - r-bedtoolsr
   - r-data.table
-  - bioconductor-tximeta
-  - bioconductor-tximport
+  - r-tximport
+  #- bioconductor-tximeta
+  #- bioconductor-tximport
   - bioconductor-GenomicAlignments
