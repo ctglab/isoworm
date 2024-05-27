@@ -31,7 +31,7 @@ jobs:
         run: |
            gzip -d test_data/chr7.fa.gz
       - name: Run snakemake
-        run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k -P
+        run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
       - name: Upload plot as artifact
         uses: actions/upload-artifact@v3
         with:
