@@ -4,10 +4,12 @@ source("config_all.R")
 lapply(my_packages, require, character.only = TRUE) 
 ##### open all the bed files ##################################################
 samples_dir <- list.dirs(polyA_bam_dir, recursive = FALSE)
+print(samples_dir)
 dataframes_peak <- list()
 for (i in samples_dir){
   setwd(i)
   in.list <- list.files(path= i, recursive = T, full.names = T)
+  print(in.list)
   j <- grep("_small_Aligned.sortedByCoord.out.bam$",in.list)
   name <- paste0("quant_",gsub(".*/(SRR[0-9]+).*", "\\1",in.list[j]))
   gal <- readGAlignments(in.list[j])
