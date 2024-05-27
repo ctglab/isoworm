@@ -51,7 +51,10 @@ for (i in 1:length(final_list_x1)){
   bed_list_x1[[name]] <- assign(name, data.frame(seqnames = "chr7", starts = start(final_list_x1[[i]]), ends = end(final_list_x1[[i]])))
 }
 
+
 final_polyA_ref <- bedtoolsr::bt.multiinter(bed_list_ref)
+print(final_polyA_ref)
+final_polyA_ref
 final_polyA_filtered_ref <- subset(final_polyA_ref, (V3 - V2) >= 30 & V4 >= 50)
 final_polyA_filtered_ref <- subset(final_polyA_filtered_ref, select = 1:5)
 colnames(final_polyA_filtered_ref) <- c("chr7","start","end","total of samples","samples names")
