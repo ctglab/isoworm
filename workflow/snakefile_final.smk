@@ -425,6 +425,7 @@ rule custom_r_script:
 ## Plot the pie charts and the ratio boxplot
 rule salmon_r_script:
     input:
+        
     params:
         r_salmon = config['scripts']['r_salmon']
     output:
@@ -433,5 +434,6 @@ rule salmon_r_script:
         total_salmon = config['datadirs']['r'] + "total_salmon.pdf"
     conda:
         config['conda']['r']
+    priority: 10
     shell:
         "Rscript {params.r_salmon}"
