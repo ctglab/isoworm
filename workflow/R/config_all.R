@@ -42,7 +42,7 @@ group.colors_pie_chart <- c( "#708090", "#E6E6E6", "#D9D9D9", "#008bbf",
 ## directories
 txt_samples   <- "/home/runner/work/isoworm/isoworm/test_data"
 results_dir   <- "/home/runner/work/isoworm/isoworm/results"
-polyA_bam_dir <- "/home/runner/work/isoworm/isoworm/results/polyA/bam/"
+polyA_bam_dir <- "/home/runner/work/isoworm/isoworm/results/polyA/bam"
 final_output  <- "/home/runner/work/isoworm/isoworm/workflow/R"
 ## total salmon
 indexDir <- file.path("/home/runner/work/isoworm/isoworm/test_data/salmon_index_v43")
