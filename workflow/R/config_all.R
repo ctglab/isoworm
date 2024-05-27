@@ -32,7 +32,12 @@ label_plots <- c("lung_geo")
 
 ## Colors for the graphics
 group.colors_plot <- c()
-group.colors_pie_chart <- c()
+group.colors_pie_chart <- c( "#708090", "#E6E6E6", "#D9D9D9", "#008bbf", 
+                             "#BFBFBF", "#B3B3B3", "#A6A6A6", "#999999",
+                                         "#8C8C8C", "#808080", "#737373", "#666666",
+                                         "#595959", "#4D4D4D", "#FFD700", "#333333",
+                                         "#262626", "#1A1A1A", "#0D0D0D", "#f28e6e", 
+                                         "#cfcfc4")
 
 ## directories
 txt_samples <- "/home/runner/work/isoworm/isoworm/test_data"
