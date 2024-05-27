@@ -14,7 +14,7 @@ dependencies:
   - r-stringr
   - r-ggrepel
   - r-tibble
-  - r-bedtoolsr
+  - r-bedtoolsr=2.30.0
   - r-data.table
   - bioconductor-GenomicAlignments
   - bioconductor-tximeta
