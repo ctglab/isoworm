@@ -21,7 +21,8 @@ BRAF_ids <- c("ENST00000288602.11","ENST00000469930.2","ENST00000479537.6","ENST
 
 ## libraries
 my_packages <- c("dplyr","ggplot2","tidyr","ggsignif","ggpubr","patchwork","stringr",
-                 "ggrepel","bedtoolsr","tibble","GenomicAlignments", "tximport")
+                 "ggrepel","bedtoolsr","tibble","GenomicAlignments","tximeta",
+                 "tximport")
 
 ## Sample typologies
 samples_typologies <-  c("lung_geo")

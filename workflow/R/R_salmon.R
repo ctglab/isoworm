@@ -173,23 +173,6 @@ pdf("pie_charts.pdf", width = 10 ,height = 10)
 plot_final
 dev.off() 
 
-# Set the file paths
-indexDir <- file.path("/home/runner/work/isoworm/isoworm/test_data/salmon_index_v43")
-fasta    <- file.path("/home/runner/work/isoworm/isoworm/test_data/chr7_transcripts.fa")
-gtf      <- file.path("/home/runner/work/isoworm/isoworm/test_data/chr7.gtf")
-
-# Check if the files exist
-if (!file.exists(indexDir)) {
-    stop("Index directory does not exist: ", indexDir)
-}
-if (!file.exists(fasta)) {
-    stop("FASTA file does not exist: ", fasta)
-}
-if (!file.exists(gtf)) {
-    stop("GTF file does not exist: ", gtf)
-}
-
-
 ## total expression level salmon
 ## build linked Txome
 makeLinkedTxome(indexDir=indexDir,source="GENCODE",
@@ -239,4 +222,12 @@ plot_total <- ggplot(combined_df,aes(x=groups, y=log2(as.numeric(BRAF)+0.01), fi
 setwd(final_output)
 pdf("total_salmon.pdf", width = 23.5, height = 13)
 plot_total
-dev.off()
+dev.off() 
+
+
+
+
+
+
+
+
