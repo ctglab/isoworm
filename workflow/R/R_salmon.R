@@ -239,12 +239,4 @@ plot_total <- ggplot(combined_df,aes(x=groups, y=log2(as.numeric(BRAF)+0.01), fi
 setwd(final_output)
 pdf("total_salmon.pdf", width = 23.5, height = 13)
 plot_total
-dev.off() 
-
-
-
-
-
-
-
-
+dev.off()
