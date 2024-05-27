@@ -1,5 +1,5 @@
 ### Create and load vector of packages
-setwd("/home/runner/work/isoworm/isoworm/workflow/R/finale")
+setwd("/home/runner/work/isoworm/isoworm/workflow/R")
 source("config_all.R")
 lapply(my_packages, require, character.only = TRUE) 
 ##### open all the bed files ##################################################
