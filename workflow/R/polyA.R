@@ -1,5 +1,5 @@
 ### Create and load vector of packages
-setwd("/Volumes/HD2/home/maurizio/R/finale")
+setwd("/home/runner/work/isoworm/isoworm/workflow/R/finale")
 source("config_all.R")
 lapply(my_packages, require, character.only = TRUE) 
 ##### open all the bed files ##################################################
@@ -63,4 +63,4 @@ colnames(final_polyA_filtered_x1) <- c("chr7","start","end","total of samples","
 
 setwd(final_output)
 write.csv(x=final_polyA_filtered_ref, file="polyA_filtered_3UTR220.csv", row.names = FALSE)
-write.csv(x=final_polyA_filtered_x1, file="polyA_filtered_3UTR204.csv", row.names = FALSE)
+write.csv(x=final_polyA_filtered_x1,  file="polyA_filtered_3UTR204.csv", row.names = FALSE)

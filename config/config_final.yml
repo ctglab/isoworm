@@ -1,10 +1,10 @@
 # options
-workflow_type: "salmon_module"  # Options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules"
+workflow_type: "polyA_module"  # Options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules"
 freeze: GRCh38.primary_assembly.genome      # genome version
 
 ############################################################
 # top level directories
-sourcedir: results/lung_geo # your output directory
+sourcedir: results/polyA # your output directory
 refdir:    test_data  # your gtf fasta and all reference files directory
 sampledir: test_data # your txt samples files directory
 envsdir:   envs #  your envs files directory
@@ -47,7 +47,7 @@ reference:
 
 # directory structure for input and output files
 datadirs:
-  samples: $sampledir/lung_geo.txt  ### your samples here! 
+  samples: $sampledir/polyA.txt  ### your samples here! 
   benchmarks: $sourcedir/benchmarks
   stringtie: $sourcedir/stringtie
   ballgown: $sourcedir/ballgown
