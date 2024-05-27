@@ -51,7 +51,6 @@ for (i in 1:length(final_list_x1)){
   bed_list_x1[[name]] <- assign(name, data.frame(seqnames = "chr7", starts = start(final_list_x1[[i]]), ends = end(final_list_x1[[i]])))
 }
 
-
 final_polyA_ref <- bedtoolsr::bt.multiinter(bed_list_ref)
 print(final_polyA_ref)
 final_polyA_ref

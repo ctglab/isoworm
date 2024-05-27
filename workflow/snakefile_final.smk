@@ -340,13 +340,12 @@ rule STAR_align_SE:
     output:
         bam_SE= temp(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_Aligned.sortedByCoord.out.bam"),
         tab = config['datadirs']['bam'] + "/{file}/" + "{file}_SE_SJ.out.tab"
-    output:
     benchmark:
-        config['datadirs']['benchmarks'] + "/{file}/" + "{file}_SE_:staralign.benchmark"
+        config['datadirs']['benchmarks'] + "/{file}/" + "{file}_SE_staralign.benchmark"
     params:
         star = config['tools']['star'],
         genomedir = config['reference']['stargenomedir'][freeze],
-        prefix = config['datadirs']['bam'] + "/{file}/" + "{file}_"
+        prefix = config['datadirs']['bam'] + "/{file}/" + "{file}_SE_"
     conda:
         config['conda']['STAR']
     threads: 2
@@ -395,6 +394,7 @@ rule SAM_tools_SE:
         """
         {params.samtools} index {input.bam_SE}
         {params.samtools} view -bh {input.bam_SE} {params.region} > {output.small_bam_SE}
+        {params.samtools} view -c -f 1 -F 12 {output.small_bam_SE} >> {output.txt}
         """
 ################### R code to generate plots and csv files for polyA   ################################################################################################################################################
 ## create the csv file for the polyA on BRAF 3'UTR
