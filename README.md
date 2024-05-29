@@ -1,6 +1,20 @@
 ![Testing](https://github.com/mspodda/isoworm/workflows/Testing/badge.svg)
+![Build Status](https://github.com/mspodda/isoworm/actions/workflows/main.yml/badge.svg)
+![Coverage Status](https://coveralls.io/repos/github/mspodda/isoworm/badge.svg?branch=main)
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.1.0-brightgreen.svg)](https://snakemake.github.io)
 [![GitHub issues](https://img.shields.io/github/issues-raw/mspodda/isoworm)](https://github.com/mspodda/isoworm/issues) 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/mspodda/isoworm)
+![GitHub](https://img.shields.io/github/license/mspodda/isoworm)
+![GitHub issues](https://img.shields.io/github/issues/mspodda/isoworm)
+![GitHub forks](https://img.shields.io/github/forks/mspodda/isoworm)
+![GitHub Repo stars](https://img.shields.io/github/stars/mspodda/isoworm)
+![GitHub contributors](https://img.shields.io/github/contributors/mspodda/isoworm)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mspodda/isoworm)
+![GitHub last commit](https://img.shields.io/github/last-commit/mspodda/isoworm)
+![GitHub open issues](https://img.shields.io/github/issues-raw/mspodda/isoworm)
+![GitHub open pull requests](https://img.shields.io/github/issues-pr-raw/mspodda/isoworm)
+![GitHub All Releases](https://img.shields.io/github/downloads/mspodda/isoworm/total)
+![GitHub Release Downloads](https://img.shields.io/github/downloads/mspodda/isoworm/latest/total)
 
 
 
