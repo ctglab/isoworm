@@ -1,8 +1,6 @@
 ![Testing](https://github.com/mspodda/isoworm/workflows/Testing/badge.svg)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mspodda/isoworm) 
 ![GitHub last commit](https://img.shields.io/github/last-commit/mspodda/isoworm)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/mspodda/isoworm)
-![GitHub contributors](https://img.shields.io/github/contributors/mspodda/isoworm)
 [![GitHub issues](https://img.shields.io/github/issues-raw/mspodda/isoworm)](https://github.com/mspodda/isoworm/issues)
 ![GitHub open pull requests](https://img.shields.io/github/issues-pr-raw/mspodda/isoworm)
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.1.0-brightgreen.svg)](https://snakemake.github.io)
