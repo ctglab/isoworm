@@ -5,11 +5,9 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mspodda/isoworm) 
 ![GitHub last commit](https://img.shields.io/github/last-commit/mspodda/isoworm)
 ![GitHub contributors](https://img.shields.io/github/contributors/mspodda/isoworm)
+[![GitHub Website](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](https://ctglab.github.io/)
 ![GitHub forks](https://img.shields.io/github/forks/mspodda/isoworm)
 ![GitHub Repo stars](https://img.shields.io/github/stars/mspodda/isoworm)
-![GitHub Website](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)(https://ctglab.github.io/)
-![GitHub donwloads](https://img.shields.io/github/downloads/mspodda/isoworm/total.svg)
-![GitHub size](https://badge-size.herokuapp.com/mspodda/isoworm/main)
 ![GitHub watchers](https://img.shields.io/github/watchers/mspodda/isoworm.svg)
 
 # What is Isoworm
