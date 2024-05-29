@@ -5,7 +5,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mspodda/isoworm) 
 ![GitHub last commit](https://img.shields.io/github/last-commit/mspodda/isoworm)
 ![GitHub contributors](https://img.shields.io/github/contributors/mspodda/isoworm)
-![GitHub All Releases](https://img.shields.io/github/downloads/mspodda/isoworm/total)
 ![GitHub forks](https://img.shields.io/github/forks/mspodda/isoworm)
 ![GitHub Repo stars](https://img.shields.io/github/stars/mspodda/isoworm)
 
