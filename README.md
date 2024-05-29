@@ -1,7 +1,6 @@
 ![Testing](https://github.com/mspodda/isoworm/workflows/Testing/badge.svg)
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.1.0-brightgreen.svg)](https://snakemake.github.io)
 [![GitHub issues](https://img.shields.io/github/issues-raw/mspodda/isoworm)](https://github.com/mspodda/isoworm/issues) 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/isoworm)
 
 
 
