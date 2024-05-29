@@ -5,8 +5,9 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/mspodda/isoworm)
 [![GitHub issues](https://img.shields.io/github/issues-raw/mspodda/isoworm)](https://github.com/mspodda/isoworm/issues)
 ![GitHub open pull requests](https://img.shields.io/github/issues-pr-raw/mspodda/isoworm)
-![GitHub All Releases](https://img.shields.io/github/downloads/mspodda/isoworm/total)
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.1.0-brightgreen.svg)](https://snakemake.github.io)
+![GitHub contributors](https://img.shields.io/github/contributors/mspodda/isoworm)
+![GitHub All Releases](https://img.shields.io/github/downloads/mspodda/isoworm/total)
 ![GitHub forks](https://img.shields.io/github/forks/mspodda/isoworm)
 ![GitHub Repo stars](https://img.shields.io/github/stars/mspodda/isoworm)
 
