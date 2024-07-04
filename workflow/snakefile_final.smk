@@ -7,7 +7,7 @@ varsub(config)
 # Check the workflow type
 workflow_type = config['workflow_type']
 
-## Determine which genome reference you would like to use
+## Determine which, genome reference you would like to use
 ## here we are using GRCh38.primary_assembly.genome.fa + relative gtf/gff3
 ## depending on the freeze variable inside the config file, the appropriate
 ## references and data files will be chosen from the config
