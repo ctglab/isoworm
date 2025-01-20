@@ -11,7 +11,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/mspodda/isoworm.svg)
 
 # What is Isoworm
-IsoWor, is a Snakemake pipeline developed to quantify isoforms expression levels in large RNA-seq datasets (paired-end short-reads). 
+IsoWorm, is a Snakemake pipeline developed to quantify isoforms expression levels in large RNA-seq datasets (paired-end short-reads). 
 The pipeline consists of a series of interconnected modules that perform various stages of data analysis. 
 It starts with a txt file containing SRA IDs, while the indications about the RNAseq library type, or a BAM file, and the references files (FASTA and GTF) are in the snakemake config file. 
 The custom module of IsoWorm could be used to specifically analyse isoforms (in our case study, BRAF), using custom gtf files to quantify isoform-specific genomic regions. 
