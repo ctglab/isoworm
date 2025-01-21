@@ -12,24 +12,31 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v5
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: '3.10' 
-      - name: Add conda to system path
-        run: |
-          # $CONDA is an environment variable pointing to the root of the miniconda directory
-          echo $CONDA/bin >> $GITHUB_PATH
+          python-version: 3.10
+          channels: conda-forge, bioconda
+          auto-update-conda: true
+          auto-activate-base: false
+
       - name: Install dependencies
         run: |
-          conda install -c conda-forge mamba
-      - name: Setup snakemake
+          conda install -n base -c conda-forge mamba
+          conda create -n snakemake-env -c conda-forge -c bioconda mamba snakemake
+          echo "conda activate snakemake-env" >> $GITHUB_ENV
+
+      - name: Set conda package directory
         run: |
-          mamba install -c conda-forge -c bioconda snakemake
+          mkdir -p $HOME/.conda/pkgs
+          echo "CONDA_PKGS_DIRS=$HOME/.conda/pkgs" >> $GITHUB_ENV
+
       - run: echo "Finish installing snakemake"
-      - name: unzip the files
+
+      - name: Unzip the files
         run: |
            gzip -d test_data/chr7.fa.gz
-      - name: Run snakemake
-        run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
 
+      - name: Run snakemake
+        run: snakemake -s workflow/snakefile_final.smk --use-conda --rerun-incomplete --cores 1 -k
