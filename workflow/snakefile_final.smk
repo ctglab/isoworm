@@ -61,8 +61,14 @@ elif workflow_type == "custom_and_salmon_modules":
             boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
             piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
             total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
+elif workflow_type == "singlecells":
+    rule all:
+        input:
+            qc_plot =expand(config['datadirs']['singlecell'] +"/{file}/"+ "qc_plots.png", file = SAMPLES),
+            filtered_table = expand(config['datadirs']['singlecell'] +"/{file}/"+ "filtered_data.h5ad",file = SAMPLES),
+            umap_plot = expand(config['datadirs']['singlecell'] +"/{file}/"+ "umap_plot.png"file = SAMPLES)
             
-################### rules to create index files for salmon and star      ############################################################################################################################################
+################### rules to create index files for salmon and star and single cell    ############################################################################################################################################
 ## create STAR genome index
 rule STAR_index:
     input:
@@ -85,7 +91,6 @@ rule STAR_index:
         '--sjdbGTFfile {input.gtf} '
         '--sjdbOverhang 100'
  
-
 
 ## create salmon gentrome
 rule salmon_gentrome:
@@ -119,6 +124,23 @@ rule salmon_index:
             salmon index -t {input.gentrome} -i {params.outdir} \
             --decoys {params.decoys} {params.outdir} --gencode -p 2
             """
+
+## create single cell index 
+rule singlecell_index:
+    input:
+        fasta = config['reference']['fasta'][freeze],
+        gtf = config['reference']['gtf'][freeze]
+    output:
+        idx = config['reference']['stargenomedir'][freeze] + "/" + "transcriptome.idx",
+        t2g = config['reference']['stargenomedir'][freeze] + "/", + "transcripts_to_genes.txt",
+        cdna = config['reference']['stargenomedir'][freeze] + "/" + "cdna.fa"
+    params:
+        kb = config['tools']['kb']
+    conda:
+        config['conda']['singlecell']
+    threads: 2
+    shell:
+        "{params.bk} ref -i {output.idx} -g {output.t2g} -f1 {output.cdna} {input.fasta} {input.gtf}"
 
 ################### download and clean the read, if bam convert to fastq ##################################################################################################################################################
 ## Download the samples as fastq (PE-seq)
@@ -437,3 +459,61 @@ rule salmon_r_script:
     priority: 10
     shell:
         "Rscript {params.r_salmon}"
+
+
+################### single cell module, select the sequencing technology on the config file   ################################################################################################################################################
+## Quality control and filtering
+rule pseudoalignment:
+    input:
+        idx = config['reference']['stargenomedir'][freeze] + "/" + "transcriptome.idx",
+        t2g = config['reference']['stargenomedir'][freeze] + "/", + "transcripts_to_genes.txt",
+        f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_1.fastq.gz",
+        f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_2.fastq.gz"
+    output:
+        h5ad = config['datadirs']['singlecell'] + "/{file}/" + "output.h5ad"
+    params:
+        kb = config['tools']['kb']
+    conda:
+        config['conda']['singlecell']
+    shell:
+        "{params.kb} count -i {input.idx} -g {input.t2g} -o {output.h5ad} -x 10xv3 --h5ad -t 2 {input.f1} {input.f2}"
+
+rule quality_control:
+    input:
+        h5ad = config['datadirs']['singlecell'] + "/{file}/" + "output.h5ad"
+    output:
+        filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    conda:
+        config['conda']['singlecell']
+    script:
+        "util/script_singlecell/qc_filtering.py {input.h5ad} {ouput.filtered}"
+
+rule pca_plot:
+    input:
+        filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    output:
+        pca_plot=config['datadirs']['singlecell'] + "/{file}/" +"pca_plot.png"
+    conda:
+        config['conda']['singlecell']
+    script:
+        "util/script_singlecell/pca_plot.py {input.h5ad} {output.pca_plot}"
+
+rule umi_saturation:
+    input:
+         filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    output:
+        qc_plots=config['datadirs']['singlecell'] + "/{file}/" +"qc_plots.png"
+    conda:
+        config['conda']['singlecell']
+    script:
+        "util/script_singlecell/qc_plots.py {input.h5ad} {output.qc_plots}"
+
+rule clustering_and_umap:
+    input:
+        filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    output:
+        umap_plot=config['datadirs']['singlecell'] + "/{file}/" +"umap_plot.png"
+    conda:
+        config['conda']['singlecell']
+    script:
+        "util/script_singlecell/umap_clustering.py {input.h5ad} {output.umap_plot}"
