@@ -24,9 +24,7 @@ jobs:
           conda install -c conda-forge -c bioconda snakemake
           conda install -c conda-forge python=3.10
       - name: Setup snakemake
-        run: |
-          mamba install -c conda-forge -c bioconda snakemake
-      - run: echo "Finish installing snakemake"
+        run: echo "Finish installing snakemake"
       - name: unzip the files
         run: |
            gzip -d test_data/chr7.fa.gz
