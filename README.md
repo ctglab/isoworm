@@ -17,6 +17,7 @@ It starts with a txt file containing SRA IDs, while the indications about the RN
 The custom module of IsoWorm could be used to specifically analyse isoforms (in our case study, BRAF), using custom gtf files to quantify isoform-specific genomic regions. 
 The quantification is made through Stringtie and all the plots are generated with R language. Conversely, the Salmon module of IsoWorm was used to quantify all the isoforms annotated in Ensembl db (our reference). 
 An R script generates pie charts for genen isoform expression. IsoWorm implent also a module for single-end reads tp identifies polyA sites using custom R scripts, starting form Quant Seq 3' REV sequencing data.
+An extra module quantify gene expression on single cell data
 
 
 ## Getting Started
@@ -26,7 +27,7 @@ An R script generates pie charts for genen isoform expression. IsoWorm implent a
 The input files and parameters are specified in `config_final.yml`, and for R plots and script in config file for R:
 
 ####  top level directories
-- `workflow_type: ""  ` - options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules"
+- `workflow_type: ""  ` - options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules","singlecell_module"
 - `sourcedir: ` -  your output directory
 - `refdir:    ` -  your gtf fasta and all reference files directory
 - `sampledir: ` -  your txt samples files directory
@@ -35,8 +36,8 @@ The input files and parameters are specified in `config_final.yml`, and for R pl
 - `samples: ` -  your txt file containig the sra samples here!
   
 #### reference files, genome indices and data
-- `stargenomedir, GRCh38.primary_assembly.genome:` - directory for STAR genome 
-- `fasta: GRCh38.primary_assembly.genome:` -  genome fasta reference file for STAR
+- `stargenomedir, GRCh38.primary_assembly.genome:` - directory for STAR genome and Single cell index files
+- `fasta: GRCh38.primary_assembly.genome:` -  genome fasta reference file for STAR and Single cell
 - `fasta_salmon: GRCh38.primary_assembly.genome:` -  transcript fasta reference for salmon
 - `gtf: GRCh38.primary_assembly.genome:` - gtf file for all transcripts
 - `gtf_personal: GRCh38.primary_assembly.genome:` - gtf file customize for your transcript of interest
@@ -59,6 +60,11 @@ The input files and parameters are specified in `config_final.yml`, and for R pl
 - `{file}_small_Aligned.sortedByCoord.out.bam` - sliced bam of you gene of interest (BRAF in our case study)
 - `ratio_BRAF.pdf` -  box plots ratio between our two isoforms of interest
 
+### single cell module
+- `filtered_data.h5ad` - filtered count from a single single cell sample
+- `umap_plot.png`- umap plot with differents cell clusters
+- `qc_plots` - quality controll plot
+- 
 ### Dependencies
 - [miniconda](https://conda.io/miniconda.html) - install it according to the [instructions](https://conda.io/docs/user-guide/install/index.html).
 - [snakemake](https://anaconda.org/bioconda/snakemake) install using `conda`.
