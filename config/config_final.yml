@@ -31,6 +31,7 @@ conda:
   stringtie: $envsdir/stringtie.yml
   salmon: $envsdir/salmon.yml
   r: $envsdir/R.yml
+  singlecell: $envsdir/singlecell.yaml
 
 # reference files, genome indices and data
 reference:
