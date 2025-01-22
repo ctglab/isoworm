@@ -44,27 +44,27 @@ The input files and parameters are specified in `config_final.yml`, and for R pl
 
 
 ### Output
-#### polyA modules
+#### polyA module
 - `SAindex` - star index
 - `{sample_name}_SE_small_Aligned.sortedByCoord.out.bam` - sliced bam of you gene of interest (BRAF in our case study), single end
 - `polyA_filtered_3UTR204.csv` - peaks for poly A in BRAF-204 UTRs
 - `polyA_filtered_3UTR220.csv` - peaks for poly A in BRAF-220 UTRs
-#### salmon modules
+#### salmon module
 - `salmon_index` - salmon index
 - `quant.sf` - all transcript quantified by salmon
 - `ratio_salmon.pdf` -  box plots ratio between our two isoforms of interest
 - `pie_charts.pdf` - pie charts expressions values of all our isoforms of interest
 - `total_salmon.pdf` - total expression levels of our gene of interest
-#### custom modules
+#### custom module
 - `SAindex` - star index
 - `{file}_small_Aligned.sortedByCoord.out.bam` - sliced bam of you gene of interest (BRAF in our case study)
 - `ratio_BRAF.pdf` -  box plots ratio between our two isoforms of interest
 
-### single cell module
+#### single cell module
 - `filtered_data.h5ad` - filtered count from a single single cell sample
 - `umap_plot.png`- umap plot with differents cell clusters
 - `qc_plots` - quality controll plot
-- 
+
 ### Dependencies
 - [miniconda](https://conda.io/miniconda.html) - install it according to the [instructions](https://conda.io/docs/user-guide/install/index.html).
 - [snakemake](https://anaconda.org/bioconda/snakemake) install using `conda`.
