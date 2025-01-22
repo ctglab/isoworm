@@ -27,7 +27,7 @@ An extra module quantify gene expression on single cell data
 The input files and parameters are specified in `config_final.yml`, and for R plots and script in config file for R:
 
 ####  top level directories
-- `workflow_type: ""  ` - options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules","singlecell_module"
+- `workflow_type: ""  ` - options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules", "singlecell_module"
 - `sourcedir: ` -  your output directory
 - `refdir:    ` -  your gtf fasta and all reference files directory
 - `sampledir: ` -  your txt samples files directory
