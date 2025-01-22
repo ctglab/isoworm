@@ -61,7 +61,7 @@ elif workflow_type == "custom_and_salmon_modules":
             boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
             piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
             total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
-elif workflow_type == "singlecells":
+elif workflow_type == "singlecells_module":
     rule all:
         input:
             qc_plot =expand(config['datadirs']['singlecell'] +"/{file}/"+ "qc_plots.png", file = SAMPLES),
