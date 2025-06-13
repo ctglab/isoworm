@@ -68,7 +68,7 @@ The input files and parameters are specified in `config_final.yml`, and for R pl
 - `filtered_data.h5ad` - filtered count from a single single cell sample
 - `umap_plot.png`- umap plot with differents cell clusters
 - `qc_plots` - quality controll plot
-- 
+
 ### Dependencies
 - [miniconda](https://conda.io/miniconda.html) - install it according to the [instructions](https://conda.io/docs/user-guide/install/index.html).
 - [snakemake](https://anaconda.org/bioconda/snakemake) install using `conda`.
