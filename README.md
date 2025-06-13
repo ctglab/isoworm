@@ -17,7 +17,7 @@ The pipeline consists of a series of interconnected modules that perform various
 It starts with a txt file containing SRA IDs, while the indications about the RNAseq library type, or a BAM file, and the references files (FASTA and GTF) are in the snakemake config file. 
 The custom module of IsoWorm could be used to specifically analyse isoforms (in our case study, BRAF), using custom gtf files to quantify isoform-specific genomic regions. 
 The quantification is made through Stringtie and all the plots are generated with R language. Conversely, the Salmon module of IsoWorm was used to quantify all the isoforms annotated in Ensembl db (our reference). 
-An R script generates pie charts for genen isoform expression. IsoWorm implent also a module for single-end reads tp identifies polyA sites using custom R scripts, starting form Quant Seq 3' REV sequencing data.
+An R script generates pie charts for genen isoform expression. IsoWorm implent also a module for single-end reads tp identifies polyA sites using custom R scripts, starting form Quant Seq 3' REV sequencing data.\n
 DOI: https://doi.org/10.1002/1878-0261.70043
 
 
