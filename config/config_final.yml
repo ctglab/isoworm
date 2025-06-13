@@ -1,5 +1,5 @@
 # options
-workflow_type: "custom_module"  # Options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules"
+workflow_type: "salmon_module"  # Options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules","singlecell_module"
 freeze: GRCh38.primary_assembly.genome      # genome version
 
 ############################################################
@@ -20,6 +20,7 @@ tools:
   star: STAR
   stringtie: stringtie
   salmon: salmon
+  kb: kb
 
 # conda envs
 conda:
@@ -30,15 +31,17 @@ conda:
   STAR: $envsdir/STAR.yml
   stringtie: $envsdir/stringtie.yml
   salmon: $envsdir/salmon.yml
+  r: $envsdir/R.yml
+  singlecell: $envsdir/singlecell.yaml
 
 # reference files, genome indices and data
 reference:
   stargenomedir:
     GRCh38.primary_assembly.genome: $refdir/GRCh38.primary_assembly.genome
   fasta:
-    GRCh38.primary_assembly.genome: $refdir/chr7.fa.gz
+    GRCh38.primary_assembly.genome: $refdir/chr7.fa
   fasta_salmon:
-    GRCh38.primary_assembly.genome: $refdir/gencode.v46.transcripts.fa
+    GRCh38.primary_assembly.genome: $refdir/chr7_transcripts.fa
   gtf:
     GRCh38.primary_assembly.genome: $refdir/chr7.gtf
   gtf_personal:
@@ -46,17 +49,18 @@ reference:
 
 # directory structure for input and output files
 datadirs:
-  samples: $sampledir/lung_geo.txt  ### your samples here! 
+  samples: $sampledir/polyA.txt  ### your samples here! 
   benchmarks: $sourcedir/benchmarks
   stringtie: $sourcedir/stringtie
   ballgown: $sourcedir/ballgown
-  fastq: $sourcedir/fastq
+  fastq: $sourcedir/polyA/fastq  # your fastq files directory
   salmon_index: $refdir
   sam: $sampledir/sam
   bam: $sourcedir/bam
   small_bam: $sourcedir/small_bam
   stringtie_complete: $sourcedir/stringtie_complete
   gene_expression: $sourcedir/gene_expression
+  singlecell: $sourcedir/singlecell
   salmon: $sourcedir/salmon
   r: $workflow/R/
 
@@ -67,3 +71,4 @@ scripts:
   r_custom: $workflow/R/R_custom.R
   r_salmon: $workflow/R/R_salmon.R
   r_polya:  $workflow/R/polyA.R
+  singlecell: $workflow/util/singlecell/

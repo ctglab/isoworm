@@ -1,0 +1,24 @@
+name: salmon
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=2_gnu
+  - boost-cpp=1.78.0=h5adbc97_2
+  - bzip2=1.0.8=hd590300_5
+  - icu=70.1=h27087fc_0
+  - libgcc-ng=13.2.0=h807b86a_3
+  - libgomp=13.2.0=h807b86a_3
+  - libhwloc=2.9.1=hd6dc26d_0
+  - libiconv=1.17=hd590300_2
+  - libjemalloc=5.3.0=hcb278e6_0
+  - libstdcxx-ng=13.2.0=h7e041cc_3
+  - libxml2=2.10.3=hca2bb57_4
+  - libzlib=1.2.13=hd590300_5
+  - salmon=1.10.2=hecfa306_0
+  - tbb=2021.9.0=hf52228f_0
+  - xz=5.2.6=h166bdaf_0
+  - zstd=1.5.5=hfc55251_0
+prefix: /CTGlab/home/maurizio/miniconda3/envs/salmon

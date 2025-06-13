@@ -1,0 +1,7 @@
+name: STAR
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - star=2.7.10a=h9ee0642_0
+prefix: /CTGlab/home/maurizio/miniconda3/envs/STAR

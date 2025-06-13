@@ -61,41 +61,48 @@ elif workflow_type == "custom_and_salmon_modules":
             boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
             piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
             total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
+elif workflow_type == "singlecells_module":
+    rule all:
+        input:
+            qc_plot =expand(config['datadirs']['singlecell'] +"/{file}/"+ "qc_plots.png", file = SAMPLES),
+            filtered_table = expand(config['datadirs']['singlecell'] +"/{file}/"+ "filtered_data.h5ad",file = SAMPLES),
+            umap_plot = expand(config['datadirs']['singlecell'] +"/{file}/"+ "umap_plot.png", file = SAMPLES)
             
-################### rules to create index files for salmon and star      ############################################################################################################################################
+################### rules to create index files for salmon and star and single cell    ############################################################################################################################################
 ## create STAR genome index
 rule STAR_index:
     input:
         fasta = config['reference']['fasta'][freeze],
         gtf   = config['reference']['gtf'][freeze]
     output:
-        genomedir = config['reference']['stargenomedir'][freeze],
+        directory(config['reference']['stargenomedir'][freeze]),
         starindex = config['reference']['stargenomedir'][freeze] + "/" + "SAindex"
     params:
         star = config['tools']['star'],
     conda:
         config['conda']['STAR']
     threads: 2
+    priority: 100
     shell:
-        'mkdir {output.genomedir} && '
         '{params.star} --runThreadN {threads} '
         '--runMode genomeGenerate '
-        '--readFilesCommand zcat '
-        '--genomeDir {output.genomedir} '
+        '--genomeDir {output} '
         '--genomeFastaFiles {input.fasta} '
         '--sjdbGTFfile {input.gtf} '
-        '--sjdbOverhang 100 '
+        '--sjdbOverhang 100'
+ 
 
 ## create salmon gentrome
 rule salmon_gentrome:
         input:
             fasta = config['reference']['fasta'][freeze],
-            transcriptome_fasta = config['reference']['fasta'][freeze]
+            transcriptome_fasta = config['reference']['fasta_salmon'][freeze]
         output:
             temp(config['refdir'] + "/salmon_index_v43/" + 'gentrome.fa.gz')
         params:
             gentrome_sh = config['scripts']['gentrome_sh'],
             outdir=config['refdir'] + "/salmon_index_v43/"
+        priority: 100
         shell:
             "sh {params.gentrome_sh} {input.fasta} {input.transcriptome_fasta} {params.outdir}"
 
@@ -111,11 +118,29 @@ rule salmon_index:
             decoys = config['refdir'] + "/salmon_index_v43/" + 'decoys.txt'
         conda:
             config['conda']['salmon']
+        priority: 80
         shell:
             """
             salmon index -t {input.gentrome} -i {params.outdir} \
             --decoys {params.decoys} {params.outdir} --gencode -p 2
             """
+
+## create single cell index 
+rule singlecell_index:
+    input:
+        fasta = config['reference']['fasta'][freeze],
+        gtf = config['reference']['gtf'][freeze]
+    output:
+        idx = config['reference']['stargenomedir'][freeze] + "/" + "transcriptome.idx",
+        t2g = config['reference']['stargenomedir'][freeze] + "/" + "transcripts_to_genes.txt",
+        cdna = config['reference']['stargenomedir'][freeze] + "/" + "cdna.fa"
+    params:
+        kb = config['tools']['kb']
+    conda:
+        config['conda']['singlecell']
+    threads: 2
+    shell:
+        "{params.kb} ref -i {output.idx} -g {output.t2g} -f1 {output.cdna} {input.fasta} {input.gtf}"
 
 ################### download and clean the read, if bam convert to fastq ##################################################################################################################################################
 ## Download the samples as fastq (PE-seq)
@@ -141,8 +166,8 @@ rule fastp:
         f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_1.fastq.gz",
         f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_2.fastq.gz"
     output:
-        f1_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R1.fq.gz"),
-        f2_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R2.fq.gz")
+        f1_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R1.fq"),
+        f2_fp = temp(config['datadirs']['fastq'] + "/{file}/" + "{file}_R2.fq")
     benchmark:
         config['datadirs']['benchmarks'] + "/{file}/" + "{file}_fastp.benchmark"
     params:
@@ -178,8 +203,8 @@ rule bam_to_fq:
 ## align the reads with star (PE-seq)
 rule STAR_align:
     input:
-        f1_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R1.fq.gz",
-        f2_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R2.fq.gz"
+        f1_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R1.fq",
+        f2_fp = config['datadirs']['fastq'] +  "/{file}/"+ "{file}_R2.fq"
     output:
         bam = temp(config['datadirs']['bam'] +  "/{file}/"+ "{file}_Aligned.sortedByCoord.out.bam"),
         tab = config['datadirs']['bam'] +  "/{file}/"+ "{file}_SJ.out.tab"
@@ -192,6 +217,7 @@ rule STAR_align:
     conda:
             config['conda']['STAR']
     threads: 2
+    priority: 50
     shell:
         '{params.star} --runThreadN {threads} '
         '--genomeDir {params.genomedir} '
@@ -203,6 +229,7 @@ rule STAR_align:
         '--outSAMattributes NH HI NM MD AS nM jM jI XS '
         '--outBAMsortingBinsN 100 '
         '--winAnchorMultimapNmax 100 '
+
 
 ## zip the tabs files to save space
 rule zip_tabs:
@@ -272,8 +299,8 @@ rule stringtie_count:
 
 rule salmon_quant:
         input:
-            f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_1.fastq.gz",
-            f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_2.fastq.gz",
+            f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_R1.fq",
+            f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_R2.fq",
         output:
             salmon_sf = config['datadirs']['salmon'] + "/{file}/"  + "quant.sf"
         params:
@@ -288,9 +315,10 @@ rule salmon_quant:
         threads: 2
         conda:
             config['conda']['salmon']
+        priority: 60
         shell:
             """
-            {params.salmon} quant -l {params.libtype} -i {params.salmon_index} -1 {input.f1} -2 {input.f2} -p {threads} -o {params.outdir_all_salmon}
+            {params.salmon} quant --minAssignedFrags 9 -l {params.libtype} -i {params.salmon_index} -1 {input.f1} -2 {input.f2} -p {threads} -o {params.outdir_all_salmon}
             """
 
 
@@ -334,13 +362,12 @@ rule STAR_align_SE:
     output:
         bam_SE= temp(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_Aligned.sortedByCoord.out.bam"),
         tab = config['datadirs']['bam'] + "/{file}/" + "{file}_SE_SJ.out.tab"
-    output:
     benchmark:
-        config['datadirs']['benchmarks'] + "/{file}/" + "{file}_SE_:staralign.benchmark"
+        config['datadirs']['benchmarks'] + "/{file}/" + "{file}_SE_staralign.benchmark"
     params:
         star = config['tools']['star'],
         genomedir = config['reference']['stargenomedir'][freeze],
-        prefix = config['datadirs']['bam'] + "/{file}/" + "{file}_"
+        prefix = config['datadirs']['bam'] + "/{file}/" + "{file}_SE_"
     conda:
         config['conda']['STAR']
     threads: 2
@@ -389,6 +416,7 @@ rule SAM_tools_SE:
         """
         {params.samtools} index {input.bam_SE}
         {params.samtools} view -bh {input.bam_SE} {params.region} > {output.small_bam_SE}
+        {params.samtools} view -c -f 1 -F 12 {output.small_bam_SE} >> {output.txt}
         """
 ################### R code to generate plots and csv files for polyA   ################################################################################################################################################
 ## create the csv file for the polyA on BRAF 3'UTR
@@ -399,8 +427,10 @@ rule polyA_r_script:
     output:
         polyA_204 = config['datadirs']['r'] + "polyA_filtered_3UTR204.csv",
         polyA_220 = config['datadirs']['r'] + "polyA_filtered_3UTR220.csv"
-    script:
-        "{params.r_polya}"
+    conda:
+        config['conda']['r']
+    shell:
+        "Rscript {params.r_polya}"
 
 ## Plot the ratio boxplot
 rule custom_r_script:
@@ -409,17 +439,81 @@ rule custom_r_script:
         r_custom = config['scripts']['r_custom']
     output:
         boxplot_custom = config['datadirs']['r'] + "ratio_BRAF.pdf"
-    script:
-        "{params.r_custom}"
+    conda:
+        config['conda']['r']
+    shell:
+        "Rscript {params.r_custom}"
 
 ## Plot the pie charts and the ratio boxplot
 rule salmon_r_script:
     input:
+        salmon_sf =  expand(config['datadirs']['salmon'] + "/{file}/"  + 'quant.sf', file = SAMPLES)
     params:
         r_salmon = config['scripts']['r_salmon']
     output:
         boxplot_salmon = config['datadirs']['r'] + "ratio_salmon.pdf",
         piecharts_salmon = config['datadirs']['r'] + "pie_charts.pdf",
         total_salmon = config['datadirs']['r'] + "total_salmon.pdf"
+    conda:
+        config['conda']['r']
+    priority: 10
+    shell:
+        "Rscript {params.r_salmon}"
+
+
+################### single cell module, select the sequencing technology on the config file   ################################################################################################################################################
+## Quality control and filtering
+rule pseudoalignment:
+    input:
+        idx = config['reference']['stargenomedir'][freeze] + "/" + "transcriptome.idx",
+        t2g = config['reference']['stargenomedir'][freeze] + "/" + "transcripts_to_genes.txt",
+        f1 = config['datadirs']['fastq'] + "/{file}/" + "{file}_1.fastq.gz",
+        f2 = config['datadirs']['fastq'] + "/{file}/" + "{file}_2.fastq.gz"
+    output:
+        h5ad = config['datadirs']['singlecell'] + "/{file}/" + "output.h5ad"
+    params:
+        kb = config['tools']['kb']
+    conda:
+        config['conda']['singlecell']
+    shell:
+        "{params.kb} count -i {input.idx} -g {input.t2g} -o {output.h5ad} -x 10xv3 --h5ad -t 2 {input.f1} {input.f2}"
+
+rule quality_control:
+    input:
+        h5ad = config['datadirs']['singlecell'] + "/{file}/" + "output.h5ad"
+    output:
+        filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    conda:
+        config['conda']['singlecell']
     script:
-        "{params.r_salmon}"
+        "util/script_singlecell/qc_filtering.py {input.h5ad} {ouput.filtered}"
+
+rule pca_plot:
+    input:
+        filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    output:
+        pca_plot=config['datadirs']['singlecell'] + "/{file}/" +"pca_plot.png"
+    conda:
+        config['conda']['singlecell']
+    script:
+        "util/script_singlecell/pca_plot.py {input.h5ad} {output.pca_plot}"
+
+rule umi_saturation:
+    input:
+         filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    output:
+        qc_plots=config['datadirs']['singlecell'] + "/{file}/" +"qc_plots.png"
+    conda:
+        config['conda']['singlecell']
+    script:
+        "util/script_singlecell/qc_plots.py {input.h5ad} {output.qc_plots}"
+
+rule clustering_and_umap:
+    input:
+        filtered=config['datadirs']['singlecell'] + "/{file}/" + "filtered_data.h5ad"
+    output:
+        umap_plot=config['datadirs']['singlecell'] + "/{file}/" +"umap_plot.png"
+    conda:
+        config['conda']['singlecell']
+    script:
+        "util/script_singlecell/umap_clustering.py {input.h5ad} {output.umap_plot}"
