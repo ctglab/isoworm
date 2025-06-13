@@ -1,5 +1,5 @@
 [![Snakemake](https://img.shields.io/badge/snakemake-≥6.1.0-brightgreen.svg)](https://snakemake.github.io)
-![Testing](https://github.com/mspodda/isoworm/workflows/Testing/badge.svg)
+![Testing](https://github.com/ctglab/isoworm/workflows/Testing/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues-raw/mspodda/isoworm)](https://github.com/mspodda/isoworm/issues)
 ![GitHub open pull requests](https://img.shields.io/github/issues-pr-raw/mspodda/isoworm)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/mspodda/isoworm) 
@@ -60,7 +60,7 @@ The input files and parameters are specified in `config_final.yml`, and for R pl
 - `{file}_small_Aligned.sortedByCoord.out.bam` - sliced bam of you gene of interest (BRAF in our case study)
 - `ratio_BRAF.pdf` -  box plots ratio between our two isoforms of interest
 
-### single cell module (BETA)
+#### single cell module (BETA)
 - `filtered_data.h5ad` - filtered count from a single single cell sample
 - `umap_plot.png`- umap plot with differents cell clusters
 - `qc_plots` - quality controll plot
