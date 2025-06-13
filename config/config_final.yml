@@ -49,11 +49,11 @@ reference:
 
 # directory structure for input and output files
 datadirs:
-  samples: $sampledir/polyA.txt  ### your samples here! 
+  samples: $sampledir/lung_geo.txt  ### your samples here! 
   benchmarks: $sourcedir/benchmarks
   stringtie: $sourcedir/stringtie
   ballgown: $sourcedir/ballgown
-  fastq: $sourcedir/polyA/fastq  # your fastq files directory
+  fastq: $sourcedir/lung_geo/fastq  # your fastq files directory
   salmon_index: $refdir
   sam: $sampledir/sam
   bam: $sourcedir/bam
