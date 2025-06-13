@@ -1,4 +1,4 @@
-source("/home/runner/work/isoworm2/isoworm2/workflow/R/config_all.R")
+source("/home/runner/work/isoworm/isoworm/workflow/R/config_all.R")
 lapply(my_packages, require, character.only = TRUE)
 library(data.table)
 ### Create a list with all txt files containing the samples for each tissues line 
