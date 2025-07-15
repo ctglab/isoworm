@@ -51,7 +51,7 @@ Edit the config.yaml file to set the appropriate parameters for your isoform ana
 
 If you wish to generate plots in R, make sure to modify the settings in the R configuration file accordingly.
 
-#### Config.yaml inputs 
+### Config.yaml mandatory parameters
 ####  top level directories
 - `workflow_type: ""  ` - options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules", "singlecell_module"
 - `sourcedir: ` -  your output directory
@@ -66,7 +66,7 @@ If you wish to generate plots in R, make sure to modify the settings in the R co
 - `fasta: GRCh38.primary_assembly.genome:` -  genome fasta reference file for STAR and Single cell
 - `fasta_salmon: GRCh38.primary_assembly.genome:` -  transcript fasta reference for salmon
 - `gtf: GRCh38.primary_assembly.genome:` - gtf file for all transcripts
-- `gtf_personal: GRCh38.primary_assembly.genome:` - gtf file customize for your transcript of interest
+- `gtf_personal: GRCh38.primary_assembly.genome:` - gtf file customize for your transcript of interest 
 
 
 ### Output
