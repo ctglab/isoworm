@@ -39,40 +39,40 @@ for (y in 1:length(samples_files)){
 
 ### Extract reads count from stringtie final file for REF and X1 (fragments) for each cell line typology
 ## Create a list with all the count reads for each samples (X1 and ref) inside the results directory  (for each group)
-read_count_x1 <- list()
-read_count_ref <- list()
+read_count_transcript_2 <- list()
+read_count_transcript_1 <- list()
 for (y in 1:length(samples_files)){
-  read_count_x1  <- list()
-  read_count_ref <- list()
+  read_count_transcript_2  <- list()
+  read_count_transcript_1 <- list()
   for (i in 1:length(samples_files[[y]])){
     for(j in samples_files[[y]][[i]]){
       setwd(ballgown_samples[y])
       current_sample <- j
       in.list <- list.files(path= j, recursive = T, full.names = T)
       exons_data <- fread(in.list[1])
-      read_count_x1  <- na.omit(append(read_count_x1, as.numeric(exons_data$rcount[1])))
-      read_count_ref <- na.omit(append(read_count_ref,as.numeric(exons_data$rcount[3])))
-      assign(paste0(samples_typologies[y],"_X1_counts"),  read_count_x1)
-      assign(paste0(samples_typologies[y],"_ref_counts"), read_count_ref)
+      read_count_transcript_2  <- na.omit(append(read_count_transcript_2, as.numeric(exons_data$rcount[1])))
+      read_count_transcript_1 <- na.omit(append(read_count_transcript_1,as.numeric(exons_data$rcount[3])))
+      assign(paste0(samples_typologies[y],"_transcript_2_counts"),  read_count_transcript_2)
+      assign(paste0(samples_typologies[y],"_transcript_1_counts"), read_count_transcript_1)
     }
   }
 } 
 
 ### Calculate FPKM for X1 and Ref for each tissue typology
-FPKM_Ref <-list()
-FPKM_X1  <-list()
+FPKM_transcript_1 <-list()
+FPKM_transcript_2  <-list()
 count = 0
 for (y in 1:length(samples_files)){
-  FPKM_Ref <-list()
-  FPKM_X1  <-list()
+  FPKM_transcript_1 <-list()
+  FPKM_transcript_2  <-list()
   count = 0
   for (i in 1:length(samples_files[[y]])){
     for(j in 1:length(samples_files[[y]][[i]])){
       count = count + 1
-      FPKM_X1  <- append(FPKM_X1, 10^9* get(paste0(samples_typologies[y],"_X1_counts"))[[count]]/(length_x1*get(paste0(samples_typologies[y],"_reads_counts"))[[count]]))
-      FPKM_Ref <- append(FPKM_Ref,10^9* get(paste0(samples_typologies[y],"_ref_counts"))[[count]]/(length_ref*get(paste0(samples_typologies[y],"_reads_counts"))[[count]]))
-      assign(paste0(samples_typologies[y],"_X1_FPKM"),  FPKM_X1)
-      assign(paste0(samples_typologies[y],"_ref_FPKM"), FPKM_Ref)  
+      FPKM_transcript_2  <- append(FPKM_transcript_2, 10^9* get(paste0(samples_typologies[y],"_transcript_2_counts"))[[count]]/(length_transcript_2*get(paste0(samples_typologies[y],"_reads_counts"))[[count]]))
+      FPKM_transcript_1 <- append(FPKM_transcript_1,10^9* get(paste0(samples_typologies[y],"_transcript_1_counts"))[[count]]/(length_transcript_1*get(paste0(samples_typologies[y],"_reads_counts"))[[count]]))
+      assign(paste0(samples_typologies[y],"_transcript_2_FPKM"),  FPKM_transcript_2)
+      assign(paste0(samples_typologies[y],"_transcript_1_FPKM"), FPKM_transcript_1)  
     }
   }
 }
@@ -81,7 +81,7 @@ for (y in 1:length(samples_files)){
 transcript_results <- list()
 count = 1
 for(i in samples_typologies){
-  assign(paste0(i,"_transcript_results"), do.call(rbind, Map(data.frame, transcript_ref=get(paste0(i,"_ref_FPKM")), transcript_X1=get(paste0(i,"_X1_FPKM")))))
+  assign(paste0(i,"_transcript_results"), do.call(rbind, Map(data.frame, transcript_transcript_1=get(paste0(i,"_transcript_1_FPKM")), transcript_transcript_2=get(paste0(i,"_transcript_2_FPKM")))))
   transcript_results[count] <- list(get(paste0(i,"_transcript_results")))
   colnames(transcript_results[[count]]) <- c("transcript Reference", "transcript X1")
   count = count + 1 
