@@ -22,47 +22,47 @@ for (i in samples_dir){
   }
 }
 
-final_list_ref <-list()
-final_list_x1  <- list()
-final_list_BRAF  <- list()
+final_list_transcript_1 <-list()
+final_list_transcript_2  <- list()
+final_list_transcript  <- list()
 for (i in 1:length(dataframes_peak)){
   name <- paste0("peaks_",names(dataframes_peak)[[i]])
-  final_list_ref[[name]]  <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_3utr_ref) & (end(dataframes_peak[[i]]) <= start_3utr_ref)))
-  final_list_x1[[name]]   <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_3utr_X1) & (end(dataframes_peak[[i]]) <= start_3utr_X1)))
-  final_list_BRAF[[name]] <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_BRAF) & (end(dataframes_peak[[i]]) <= start_BRAF)))
+  final_list_transcript_1[[name]]  <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_unique_region_transcript_1) & (end(dataframes_peak[[i]]) <= start_unique_region_transcript_1)))
+  final_list_transcript_2[[name]]   <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_unique_region_transcript_2) & (end(dataframes_peak[[i]]) <= start_unique_region_transcript_2)))
+  final_list_transcript[[name]] <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_transcript) & (end(dataframes_peak[[i]]) <= start_transcript)))
 }
 
 # Crea un dataframe con le informazioni estratte
-bed_list_ref <-list()
-for (i in 1:length(final_list_ref)){
-  if (length(final_list_ref[[i]]) == 0) {
+bed_list_transcript_1 <-list()
+for (i in 1:length(final_list_transcript_1)){
+  if (length(final_list_transcript_1[[i]]) == 0) {
     next  # Skip this iteration
   }
-  name <- paste0("bed_", names(final_list_ref)[[i]])
-  bed_list_ref[[name]] <- assign(name, data.frame(seqnames = "chr7", starts = start(final_list_ref[[i]]), ends = end(final_list_ref[[i]])))
+  name <- paste0("bed_", names(final_list_transcript_1)[[i]])
+  bed_list_transcript_1[[name]] <- assign(name, data.frame(seqnames = "chr7", starts = start(final_list_transcript_1[[i]]), ends = end(final_list_transcript_1[[i]])))
 }
 
-bed_list_x1 <-list()
-for (i in 1:length(final_list_x1)){
-  if (length(final_list_x1[[i]]) == 0) {
+bed_list_transcript_2 <-list()
+for (i in 1:length(final_list_transcript_2)){
+  if (length(final_list_transcript_2[[i]]) == 0) {
     next  # Skip this iteration
   }
-  name <- paste0("bed_", names(final_list_x1)[[i]])
-  bed_list_x1[[name]] <- assign(name, data.frame(seqnames = "chr7", starts = start(final_list_x1[[i]]), ends = end(final_list_x1[[i]])))
+  name <- paste0("bed_", names(final_list_transcript_2)[[i]])
+  bed_list_transcript_2[[name]] <- assign(name, data.frame(seqnames = "chr7", starts = start(final_list_transcript_2[[i]]), ends = end(final_list_transcript_2[[i]])))
 }
 
-final_polyA_ref <- bedtoolsr::bt.multiinter(bed_list_ref)
-print(final_polyA_ref)
-final_polyA_ref
-final_polyA_filtered_ref <- subset(final_polyA_ref, (V3 - V2) >= 30 & V4 >= 50)
-final_polyA_filtered_ref <- subset(final_polyA_filtered_ref, select = 1:5)
-colnames(final_polyA_filtered_ref) <- c("chr7","start","end","total of samples","samples names")
+final_polyA_transcript_1 <- bedtoolsr::bt.multiinter(bed_list_transcript_1)
+print(final_polyA_transcript_1)
+final_polyA_transcript_1
+final_polyA_filtered_transcript_1 <- subset(final_polyA_transcript_1, (V3 - V2) >= 30 & V4 >= 50)
+final_polyA_filtered_transcript_1 <- subset(final_polyA_filtered_transcript_1, select = 1:5)
+colnames(final_polyA_filtered_transcript_1) <- c("chr7","start","end","total of samples","samples names")
 
-final_polyA_x1  <- bedtoolsr::bt.multiinter(bed_list_x1)
-final_polyA_filtered_x1 <- subset(final_polyA_x1, (V3 - V2) >= 30 & V4 >= 50)
-final_polyA_filtered_x1 <- subset(final_polyA_filtered_x1, select = 1:5)
-colnames(final_polyA_filtered_x1) <- c("chr7","start","end","total of samples","samples names")
+final_polyA_transcript_2  <- bedtoolsr::bt.multiinter(bed_list_transcript_2)
+final_polyA_filtered_transcript_2 <- subset(final_polyA_transcript_2, (V3 - V2) >= 30 & V4 >= 50)
+final_polyA_filtered_transcript_2 <- subset(final_polyA_filtered_transcript_2, select = 1:5)
+colnames(final_polyA_filtered_transcript_2) <- c("chr7","start","end","total of samples","samples names")
 
 setwd(final_output)
-write.csv(x=final_polyA_filtered_ref, file="polyA_filtered_3UTR220.csv", row.names = FALSE)
-write.csv(x=final_polyA_filtered_x1,  file="polyA_filtered_3UTR204.csv", row.names = FALSE)
+write.csv(x=final_polyA_filtered_transcript_1, file="polyA_filtered_unique_regiontranscript_1.csv", row.names = FALSE)
+write.csv(x=final_polyA_filtered_transcript_2,  file="polyA_filtered_unique_regiontranscript_2.csv", row.names = FALSE)
