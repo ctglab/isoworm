@@ -83,13 +83,13 @@ count = 1
 for(i in samples_typologies){
   assign(paste0(i,"_transcript_results"), do.call(rbind, Map(data.frame, transcript_transcript_1=get(paste0(i,"_transcript_1_FPKM")), transcript_transcript_2=get(paste0(i,"_transcript_2_FPKM")))))
   transcript_results[count] <- list(get(paste0(i,"_transcript_results")))
-  colnames(transcript_results[[count]]) <- c("transcript Reference", "transcript X1")
+  colnames(transcript_results[[count]]) <- c("transcript 1", "transcript 2")
   count = count + 1 
 }
 db_ratio <- transcript_results
 for(i in 1:length(label_plots)){
-  colnames(db_ratio[[i]]) <- c("transcript Reference", "transcript X1")
-  db_ratio[[i]]$ratio <- log2(((db_ratio[[i]]$`transcript X1`+0.01)/(db_ratio[[i]]$`transcript Reference`+0.01)))
+  colnames(db_ratio[[i]]) <- c("transcript 1", "transcript 2")
+  db_ratio[[i]]$ratio <- log2(((db_ratio[[i]]$`transcript 2`+0.01)/(db_ratio[[i]]$`transcript 1`+0.01)))
   db_ratio[[i]]       <- db_ratio[[i]] %>% 
     pivot_longer(
       cols = `transcript Reference`:ratio,
