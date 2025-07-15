@@ -12,13 +12,15 @@ workflow_type = config['workflow_type']
 ## depending on the freeze variable inside the config file, the appropriate
 ## references and data files will be chosen from the config
 
+## If you have modified the R script section that generates the plots, please remove the '#' characters related to the plot in the rule_all part
+
 freeze = config['freeze']
 
 ## read list of samples, one per line
 with open(config['datadirs']['samples']) as f:
     SAMPLES = f.read().splitlines()
 
-# Add conditions to execute rules based on workflow type (if you have modify the R script part to generate the plots, remove the '#' relatives to the plot on the rule_all)
+# Add conditions to execute rules based on workflow type (If you have modified the R script section that generates the plots, please remove the '#' characters related to the plot in the rule_all part)
 if workflow_type == "polyA_module":
     rule all:
         input:
@@ -26,8 +28,8 @@ if workflow_type == "polyA_module":
             small_bam_SE = expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_small_Aligned.sortedByCoord.out.bam", file = SAMPLES),
             tab_zip =  expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_SJ.out.tab.gz", file = SAMPLES),
             txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_SE_reads_count_transcript.txt", file = SAMPLES),
-            polyA_204 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR204.csv", file = SAMPLES),
-            polyA_220 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR220.csv", file = SAMPLES)
+            polyA_transcript_2 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_2.csv", file = SAMPLES),
+            polyA_transcript_1 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_1.csv", file = SAMPLES)
 elif workflow_type == "salmon_module":
     rule all:
         input:
@@ -425,8 +427,8 @@ rule polyA_r_script:
     params:
         r_polya = config['scripts']['r_polya']
     output:
-        polyA_204 = config['datadirs']['r'] + "polyA_filtered_3UTR204.csv",
-        polyA_220 = config['datadirs']['r'] + "polyA_filtered_3UTR220.csv"
+        polyA_transcript_2 = config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_2.csv",
+        polyA_transcript_1 = config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_1.csv"
     conda:
         config['conda']['r']
     shell:
