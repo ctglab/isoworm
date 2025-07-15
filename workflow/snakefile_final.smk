@@ -28,8 +28,8 @@ if workflow_type == "polyA_module":
             small_bam_SE = expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_small_Aligned.sortedByCoord.out.bam", file = SAMPLES),
             tab_zip =  expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_SJ.out.tab.gz", file = SAMPLES),
             txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_SE_reads_count_transcript.txt", file = SAMPLES),
-            polyA_transcript_2 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_2.csv", file = SAMPLES),
-            polyA_transcript_1 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_1.csv", file = SAMPLES)
+            polyA_transcript_2 = expand(config['datadirs']['r'] + "polyA_filtered_unique_region_transcript_2.csv", file = SAMPLES),
+            polyA_transcript_1 = expand(config['datadirs']['r'] + "polyA_filtered_unique_region_transcript_1.csv", file = SAMPLES)
 elif workflow_type == "salmon_module":
     rule all:
         input:
@@ -427,8 +427,8 @@ rule polyA_r_script:
     params:
         r_polya = config['scripts']['r_polya']
     output:
-        polyA_transcript_2 = config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_2.csv",
-        polyA_transcript_1 = config['datadirs']['r'] + "polyA_filtered_3UTR_transcript_1.csv"
+        polyA_transcript_2 = config['datadirs']['r'] + "polyA_filtered_unique_region_transcript_2.csv",
+        polyA_transcript_1 = config['datadirs']['r'] + "polyA_filtered_unique_region_transcript_1.csv"
     conda:
         config['conda']['r']
     shell:
