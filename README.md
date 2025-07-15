@@ -26,10 +26,32 @@ An R script generates pie charts for genen isoform expression. IsoWorm implent a
 
 ## Getting Started
 
-### Input
+### Input Files and Configuration
+To run this Snakemake workflow, you need a .txt file that lists your sample names. This file is used to assign the '{file}' wildcard within the workflow, which links each rule's output to the correct sample.
 
-The input files and parameters are specified in `config_final.yml`, and for R plots and script in config file for R:
+For example, if your .txt file contains the following sample names (column):
 
+Sample1  
+Sample2  
+Sample3  
+
+Then your FASTQ files must follow this naming convention:
+
+Sample1_1.fastq.gz  
+Sample1_2.fastq.gz  
+Sample2_1.fastq.gz  
+Sample2_2.fastq.gz  
+Sample3_1.fastq.gz  
+Sample3_2.fastq.gz  
+
+You can start directly from the FASTQ files without downloading them or cleaning them, as long as their filenames match the entries in the .txt file as in the example.
+
+Configuration
+Edit the config.yaml file to set the appropriate parameters for your isoform analysis.
+
+If you wish to generate plots in R, make sure to modify the settings in the R configuration file accordingly.
+
+#### Config.yaml inputs 
 ####  top level directories
 - `workflow_type: ""  ` - options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules", "singlecell_module"
 - `sourcedir: ` -  your output directory
@@ -37,7 +59,7 @@ The input files and parameters are specified in `config_final.yml`, and for R pl
 - `sampledir: ` -  your txt samples files directory
 - `envsdir:   ` - your envs files directory
 - `workflow:  ` - your workflow (.smk) files directory
-- `samples: ` -  your txt file containig the sra samples here!
+- `samples: ` -  your txt file containig the sra samples or samples name here!
   
 #### reference files, genome indices and data
 - `stargenomedir, GRCh38.primary_assembly.genome:` - directory for STAR genome and Single cell index files
