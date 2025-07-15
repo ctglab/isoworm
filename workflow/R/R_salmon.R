@@ -21,12 +21,12 @@ print(salmon_samples)
 ## Create a list with all the tpm count for each samples (X1 and ref) inside the results directory  (for each group)
 tpm_x1_list   <- list()
 tpm_ref_list  <- list()
-tpm_braf_list <- list()
+tpm_transcript_list <- list()
 coldata_list  <- list()
 for (y in 1:length(samples_files)){
   tpm_x1   <- list()
   tpm_ref  <- list()
-  tpm_braf <- list()
+  tpm_transcript <- list()
   coldata <- data.frame(files = character(), names = character(), stringsAsFactors = FALSE)
   for (i in 1:length(samples_files[[y]])){
     for(j in samples_files[[y]][[i]]){
@@ -39,12 +39,12 @@ for (y in 1:length(samples_files)){
       transcript_data <- fread(in.list[11])
       X1_tpm  <- subset(transcript_data, Name == "ENST00000496384.7")
       Ref_tpm <- subset(transcript_data, Name == "ENST00000646891.2")
-      BRAF <- subset(transcript_data, Name %in% BRAF_ids)
-      BRAF <- subset(BRAF, select = c("Name", "TPM"))
-      tpm_braf <- append(tpm_braf,BRAF)
+      transcript <- subset(transcript_data, Name %in% transcript_ids)
+      transcript <- subset(transcript, select = c("Name", "TPM"))
+      tpm_transcript <- append(tpm_transcript,transcript)
       tpm_x1  <- append(tpm_x1,X1_tpm$TPM)
       tpm_ref  <- append(tpm_ref,Ref_tpm$TPM)
-      assign(paste0(samples_typologies[y],"_tpm_braf"), tpm_braf)
+      assign(paste0(samples_typologies[y],"_tpm_transcript"), tpm_transcript)
       assign(paste0(samples_typologies[y],"_tpm_x1"), tpm_x1)
       assign(paste0(samples_typologies[y],"_tpm_ref"), tpm_ref)
       transcript_data <- in.list[11]
@@ -52,41 +52,41 @@ for (y in 1:length(samples_files)){
       coldata <- rbind(coldata, data.frame(files = files, names = current_sample, stringsAsFactors = FALSE))
     }
   }
-  assign(paste0(samples_typologies[y],"_tpm_braf"), 
-  divide_in_sottoliste(get(paste0(samples_typologies[y],"_tpm_braf"))))
+  assign(paste0(samples_typologies[y],"_tpm_transcript"), 
+  divide_in_sottoliste(get(paste0(samples_typologies[y],"_tpm_transcript"))))
   assign(paste0(samples_typologies[y],"_merged"), 
-  Reduce(merge_by_target_id, get(paste0(samples_typologies[y],"_tpm_braf"))))
+  Reduce(merge_by_target_id, get(paste0(samples_typologies[y],"_tpm_transcript"))))
   coldata_list[[paste0("coldata", y)]] <- coldata
 }
 
 #### ratiooo
-BRAF_results <- list()
+transcript_results <- list()
 count = 1
 for(i in samples_typologies){
-  assign(paste0(i,"_BRAF_results"), do.call(rbind, Map(data.frame, BRAF_ref=get(paste0(i,"_tpm_ref")), BRAF_X1=get(paste0(i,"_tpm_x1")))))
-  BRAF_results[count] <- list(get(paste0(i,"_BRAF_results")))
-  names(BRAF_results[count]) <- i
-  colnames(BRAF_results[[count]]) <- c("BRAF Reference", "BRAF X1")
+  assign(paste0(i,"_transcript_results"), do.call(rbind, Map(data.frame, transcript_ref=get(paste0(i,"_tpm_ref")), transcript_X1=get(paste0(i,"_tpm_x1")))))
+  transcript_results[count] <- list(get(paste0(i,"_transcript_results")))
+  names(transcript_results[count]) <- i
+  colnames(transcript_results[[count]]) <- c("transcript Reference", "transcript X1")
   count = count + 1 
 }
 
 for(i in 1:length(samples_typologies)){
-  BRAF_results[[i]]$ratio <- ((BRAF_results[[i]]$`BRAF X1`+0.01)/(BRAF_results[[i]]$`BRAF Reference`+0.01))
-  BRAF_results[[i]] <- BRAF_results[[i]] %>% 
+  transcript_results[[i]]$ratio <- ((transcript_results[[i]]$`transcript X1`+0.01)/(transcript_results[[i]]$`transcript Reference`+0.01))
+  transcript_results[[i]] <- transcript_results[[i]] %>% 
     pivot_longer(
-      cols = `BRAF Reference`:ratio,
+      cols = `transcript Reference`:ratio,
       names_to = "Isoforms",
       values_to = "value"  
     )
 }
 
-db_ratio <- rbindlist(BRAF_results)
+db_ratio <- rbindlist(transcript_results)
 db_ratio <- subset(db_ratio,Isoforms=="ratio")
 db_ratio$group <- NA
 db_ratio$IDS   <- NA
 tissues_numbers  <- c()
 for (i in 1:length(samples_typologies)){
-  tissues_numbers  <- c(tissues_numbers,nrow(get(paste0(samples_typologies[i],"_BRAF_results"))))
+  tissues_numbers  <- c(tissues_numbers,nrow(get(paste0(samples_typologies[i],"_transcript_results"))))
 }
 
 count  = 1
@@ -113,7 +113,7 @@ bp_ratios <- ggplot(db_ratio, aes(x=group, y=log2(value), fill=group)) +
         legend.position = "none",
         legend.title = element_blank()) +
   scale_fill_manual(values=group.colors_plot) +
-  ylab(expression(paste(italic("BRAF-204/BRAF-220"), " (IsoWorm Salmon)"))) +
+  ylab(expression(paste(italic("transcript-204/transcript-220"), " (IsoWorm Salmon)"))) +
   xlab("Tissue Typology") 
 
 # Closing the graphical device
@@ -141,7 +141,7 @@ for (y in 1:length(samples_files)){
            coord_polar("y", start=0) +
            labs(x = NULL, y = NULL, fill = NULL) +
            theme_classic() +
-           geom_label_repel(data =subset(new,ID == "BRAF-204" | ID== "BRAF-220"),
+           geom_label_repel(data =subset(new,ID == "transcript-204" | ID== "transcript-220"),
                             aes(x="", y=means, label = ID),
                             size = 4.5, show.legend = FALSE,
                             fontface = "italic") +
@@ -198,7 +198,7 @@ for (i in 1:length(se_list)){
   gene_level_TPM <- as.data.frame(t(as.matrix(gene_level_TPM)))
   gene_level_TPM$groups <- label_plots[[i]]
   gene_level_TPM <- gene_level_TPM[-1, ]
-  colnames(gene_level_TPM) <- c("BRAF","groups")
+  colnames(gene_level_TPM) <- c("transcript","groups")
   assign(paste0(samples_typologies[i], "_gene_level_TPM"), gene_level_TPM)
 }
 
@@ -207,7 +207,7 @@ pattern <- "_gene_level_TPM"
 selected_objects <- grep(pattern, objects, value = TRUE)
 combined_df <- do.call(bind_rows, lapply(selected_objects, get))
 
-plot_total <- ggplot(combined_df,aes(x=groups, y=log2(as.numeric(BRAF)+0.01), fill=groups)) + 
+plot_total <- ggplot(combined_df,aes(x=groups, y=log2(as.numeric(transcript)+0.01), fill=groups)) + 
   geom_boxplot() +
   geom_jitter(position=position_jitter(0.2), size=2.0, alpha=0.9, pch=21,fill="black") +
   ylim(0,6) +
