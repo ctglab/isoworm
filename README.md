@@ -51,7 +51,7 @@ Edit the config.yaml file to set the appropriate parameters for your isoform ana
 
 If you wish to generate plots in R, make sure to modify the settings in the R configuration file accordingly.
 
-### Config.yaml mandatory parameters
+### Config_final.yml mandatory parameters
 ####  top level directories
 - `workflow_type: ""  ` - options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules", "singlecell_module"
 - `sourcedir: ` -  your output directory
