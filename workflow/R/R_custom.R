@@ -37,8 +37,8 @@ for (y in 1:length(samples_files)){
   }
 } 
 
-### Extract reads count from stringtie final file for REF and X1 (fragments) for each cell line typology
-## Create a list with all the count reads for each samples (X1 and ref) inside the results directory  (for each group)
+### Extract reads count from stringtie final file for transcript 1 and transcript 2 (fragments) for each cell line typology
+## Create a list with all the count reads for each samples (transcript 2 and transcript 1) inside the results directory  (for each group)
 read_count_transcript_2 <- list()
 read_count_transcript_1 <- list()
 for (y in 1:length(samples_files)){
