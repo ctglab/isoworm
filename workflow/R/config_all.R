@@ -1,18 +1,20 @@
 ## file:config_all.R
 ## values
-length_x1   <- 140725145-140719327
-length_ref  <- 140732564-140730665
-length_BRAF <- 9807	
+length_transcript_2   <- 140725145-140719327
+length_transcript_1  <- 140732564-140730665
+length_transcript <- 9807	
 # 3UTR ref
-end_3utr_ref   <- 140730665 - 100
-start_3utr_ref <- 140734900 + 100
+end_3utr_transcript_1   <- 140730665 - 100
+start_3utr_transcript_1 <- 140734900 + 100
 # 3UTR X1
-end_3utr_X1   <- 140719327  - 100
-start_3utr_X1 <- 140726516  + 100
-## BRAF
-end_BRAF   <- 140719327 - 100
-start_BRAF <- 140924929 + 100
-BRAF_ids <- c("ENST00000288602.11","ENST00000469930.2","ENST00000479537.6","ENST00000496384.7",
+end_3utr_transcript_2   <- 140719327  - 100
+start_3utr_transcript_2 <- 140726516  + 100
+## GENE
+end_transcript   <- 140719327 - 100
+start_transcript <- 140924929 + 100
+
+## put yours
+transcript_ids <- c("ENST00000288602.11","ENST00000469930.2","ENST00000479537.6","ENST00000496384.7",
               "ENST00000497784.2","ENST00000642228.1","ENST00000642272.1","ENST00000642808.1",
               "ENST00000642875.1","ENST00000643356.1","ENST00000643790.1","ENST00000644120.1",
               "ENST00000644650.1","ENST00000644905.1","ENST00000644969.2","ENST00000645443.1",
@@ -24,7 +26,7 @@ my_packages <- c("dplyr","ggplot2","tidyr","ggsignif","ggpubr","patchwork","stri
                  "ggrepel","bedtoolsr","tibble","GenomicAlignments","tximeta",
                  "tximport")
 
-## Sample typologies
+## Sample typologies (your samples name)
 samples_typologies <-  c("lung_geo")
 
 ## Labels for the graphic 
@@ -39,7 +41,7 @@ group.colors_pie_chart <- c( "#708090", "#E6E6E6", "#D9D9D9", "#008bbf",
                                          "#262626", "#1A1A1A", "#0D0D0D", "#f28e6e", 
                                          "#cfcfc4")
 
-## directories
+## directories (your directories and files used also in the snakemake workflow)
 txt_samples   <- "/home/runner/work/isoworm/isoworm/test_data"
 results_dir   <- "/home/runner/work/isoworm/isoworm/results"
 polyA_bam_dir <- "/home/runner/work/isoworm/isoworm/results/polyA/bam"
