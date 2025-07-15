@@ -18,7 +18,7 @@ freeze = config['freeze']
 with open(config['datadirs']['samples']) as f:
     SAMPLES = f.read().splitlines()
 
-# Add conditions to execute rules based on workflow type
+# Add conditions to execute rules based on workflow type (if you have modify the R script part to generate the plots, remove the '#' relatives to the plot on the rule_all)
 if workflow_type == "polyA_module":
     rule all:
         input:
@@ -33,9 +33,9 @@ elif workflow_type == "salmon_module":
         input:
             salmon_index = config['refdir'] + "/salmon_index_v43/" + 'ctable.bin',
             salmon_sf =  expand(config['datadirs']['salmon'] + "/{file}/"  + 'quant.sf', file = SAMPLES),
-            boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
-            piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
-            total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
+            #boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
+            #piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
+            #total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
 elif workflow_type == "custom_module":
     rule all:
         input:
@@ -45,7 +45,7 @@ elif workflow_type == "custom_module":
             txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_reads_count_transcript.txt", file = SAMPLES),
             tab_zip =  expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SJ.out.tab.gz", file = SAMPLES),
             ballgown = expand(config['datadirs']['ballgown'] + "/{file}/" + "{file}.gtf", file = SAMPLES),
-            boxplot_custom = expand(config['datadirs']['r'] + "ratio_transcript.pdf", file = SAMPLES)
+            #boxplot_custom = expand(config['datadirs']['r'] + "ratio_transcript.pdf", file = SAMPLES)
 elif workflow_type == "custom_and_salmon_modules":
     rule all:
         input:
@@ -57,10 +57,10 @@ elif workflow_type == "custom_and_salmon_modules":
             ballgown = expand(config['datadirs']['ballgown'] + "/{file}/" + "{file}.gtf", file = SAMPLES),
             salmon_index = config['refdir'] + "/salmon_index_v43/" + 'ctable.bin',
             salmon_sf =  expand(config['datadirs']['salmon'] + "/{file}/"  + 'quant.sf', file = SAMPLES),
-            boxplot_custom = expand(config['datadirs']['r'] + "ratio_transcript.pdf", file = SAMPLES),
-            boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
-            piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
-            total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
+            #boxplot_custom = expand(config['datadirs']['r'] + "ratio_transcript.pdf", file = SAMPLES),
+            #boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
+            #piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
+            #total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
 elif workflow_type == "singlecells_module":
     rule all:
         input:
