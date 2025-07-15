@@ -3,17 +3,17 @@
 length_transcript_2   <- 140725145-140719327
 length_transcript_1  <- 140732564-140730665
 length_transcript <- 9807	
-# 3UTR transcript 1
-end_3utr_transcript_1   <- 140730665 - 100
-start_3utr_transcript_1 <- 140734900 + 100
-# 3UTR transcript_2
-end_3utr_transcript_2   <- 140719327  - 100
-start_3utr_transcript_2 <- 140726516  + 100
+# unique_region transcript 1
+end_unique_region_transcript_1   <- 140730665 - 100
+start_unique_region_transcript_1 <- 140734900 + 100
+# unique_region transcript_2
+end_unique_region_transcript_2   <- 140719327  - 100
+start_unique_region_transcript_2 <- 140726516  + 100
 ## transcript
 end_transcript   <- 140719327 - 100
 start_transcript <- 140924929 + 100
 
-## put yours transcript ID
+## put yours transcript ID for total salmon
 transcript_ids <- c("ENST00000288602.11","ENST00000469930.2","ENST00000479537.6","ENST00000496384.7",
               "ENST00000497784.2","ENST00000642228.1","ENST00000642272.1","ENST00000642808.1",
               "ENST00000642875.1","ENST00000643356.1","ENST00000643790.1","ENST00000644120.1",
@@ -59,19 +59,19 @@ data_summary <- function(x) {
   return(c(y=m,ymin=ymin,ymax=ymax))
 }
 
-# Funzione ricorsiva per dividere la lista in sottoliste da 2 elementi
+# Recursive function to split the list into sublists of 2 elements
 divide_in_sottoliste <- function(lst) {
   if (length(lst) <= 1) {
-    return(list(lst))  # Se rimane solo un elemento, restituisci una lista con quell'elemento
+    return(list(lst))  # If only one element remains, return a list containing that element
   } else {
-    current_pair <- lst[1:2]  # Prendi i primi due elementi
-    remaining_list <- lst[-(1:2)]  # Rimuovi i primi due elementi dalla lista
+    current_pair <- lst[1:2]  # Take the first two elements
+    remaining_list <- lst[-(1:2)]  # Remove the first two elements from the list
     
     if (length(remaining_list) > 0) {
-      # Chiamata ricorsiva solo se la parte rimanente della lista non è vuota
+      # Recursive call only if the remaining part of the list is not empty
       recursive_result <- divide_in_sottoliste(remaining_list)
       
-      # Combina la coppia corrente con il risultato ricorsivo
+      # Combine the current pair with the recursive result
       final_result <- c(list(current_pair), recursive_result)
       
       return(final_result)
@@ -80,6 +80,7 @@ divide_in_sottoliste <- function(lst) {
     }
   }
 }
+
 
 ## merge target
 merge_by_target_id <- function(df1, df2) {
