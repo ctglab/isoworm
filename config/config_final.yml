@@ -1,5 +1,5 @@
 # options
-workflow_type: "salmon_module"  # Options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules","singlecell_module"
+workflow_type: "custom_and_salmon_modules"  # Options: "polyA_module", "salmon_module", "custom_module", "custom_and_salmon_modules","singlecell_module"
 freeze: GRCh38.primary_assembly.genome      # genome version
 
 ############################################################
