@@ -25,7 +25,7 @@ if workflow_type == "polyA_module":
             starindex = config['reference']['stargenomedir'][freeze] + "/" + "SAindex",
             small_bam_SE = expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_small_Aligned.sortedByCoord.out.bam", file = SAMPLES),
             tab_zip =  expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_SJ.out.tab.gz", file = SAMPLES),
-            txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_SE_reads_count_braf.txt", file = SAMPLES),
+            txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_SE_reads_count_transcript.txt", file = SAMPLES),
             polyA_204 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR204.csv", file = SAMPLES),
             polyA_220 = expand(config['datadirs']['r'] + "polyA_filtered_3UTR220.csv", file = SAMPLES)
 elif workflow_type == "salmon_module":
@@ -42,22 +42,22 @@ elif workflow_type == "custom_module":
             starindex = config['reference']['stargenomedir'][freeze] + "/" + "SAindex",
             small_bam = expand(config['datadirs']['bam'] + "/{file}/" + "{file}_small_Aligned.sortedByCoord.out.bam", file = SAMPLES),
             gtf_stringtie = expand(config['datadirs']['stringtie'] + "/{file}/" + "{file}_transcriptome.gtf", file = SAMPLES),
-            txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_reads_count_braf.txt", file = SAMPLES),
+            txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_reads_count_transcript.txt", file = SAMPLES),
             tab_zip =  expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SJ.out.tab.gz", file = SAMPLES),
             ballgown = expand(config['datadirs']['ballgown'] + "/{file}/" + "{file}.gtf", file = SAMPLES),
-            boxplot_custom = expand(config['datadirs']['r'] + "ratio_BRAF.pdf", file = SAMPLES)
+            boxplot_custom = expand(config['datadirs']['r'] + "ratio_transcript.pdf", file = SAMPLES)
 elif workflow_type == "custom_and_salmon_modules":
     rule all:
         input:
             starindex = config['reference']['stargenomedir'][freeze] + "/" + "SAindex",
             small_bam = expand(config['datadirs']['bam'] + "/{file}/" + "{file}_small_Aligned.sortedByCoord.out.bam", file = SAMPLES),
             gtf_stringtie = expand(config['datadirs']['stringtie'] + "/{file}/" + "{file}_transcriptome.gtf", file = SAMPLES),
-            txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_reads_count_braf.txt", file = SAMPLES),
+            txt = expand(config['datadirs']['bam'] + "/{file}/"+"{file}_reads_count_transcript.txt", file = SAMPLES),
             tab_zip =  expand(config['datadirs']['bam'] + "/{file}/" + "{file}_SJ.out.tab.gz", file = SAMPLES),
             ballgown = expand(config['datadirs']['ballgown'] + "/{file}/" + "{file}.gtf", file = SAMPLES),
             salmon_index = config['refdir'] + "/salmon_index_v43/" + 'ctable.bin',
             salmon_sf =  expand(config['datadirs']['salmon'] + "/{file}/"  + 'quant.sf', file = SAMPLES),
-            boxplot_custom = expand(config['datadirs']['r'] + "ratio_BRAF.pdf", file = SAMPLES),
+            boxplot_custom = expand(config['datadirs']['r'] + "ratio_transcript.pdf", file = SAMPLES),
             boxplot_salmon = expand(config['datadirs']['r'] + "ratio_salmon.pdf", file = SAMPLES),
             piecharts_salmon = expand(config['datadirs']['r'] + "pie_charts.pdf", file = SAMPLES),
             total_salmon = expand(config['datadirs']['r'] + "total_salmon.pdf", file = SAMPLES)
@@ -241,14 +241,14 @@ rule zip_tabs:
         shell:
             "gzip {input.tab}"
 
-## creating the sliced bam for the BRAF gene (PE-seq)
+## creating the sliced bam for the transcript gene (PE-seq)
 rule SAM_tools:
     input:
         bam = config['datadirs']['bam'] + "/{file}/" + "{file}_Aligned.sortedByCoord.out.bam"
     output:
         bam_idx = temp(config['datadirs']['bam'] + "/{file}/" + "{file}_Aligned.sortedByCoord.out.bam.bai"),
         small_bam = config['datadirs']['bam'] + "/{file}/" + "{file}_small_Aligned.sortedByCoord.out.bam",
-        txt = config['datadirs']['bam'] + "/{file}/"+"{file}_reads_count_braf.txt"
+        txt = config['datadirs']['bam'] + "/{file}/"+"{file}_reads_count_transcript.txt"
     params:
         samtools = config['tools']['samtools'],
         region = "chr7:140718327-140926929"
@@ -398,14 +398,14 @@ rule zip_tabs_SE:
     shell:
         "gzip {input.tab}"
 
-## creating the sliced bam for the BRAF gene (SE-seq)
+## creating the sliced bam for the transcript gene (SE-seq)
 rule SAM_tools_SE:
     input:
         bam_SE= config['datadirs']['bam'] + "/{file}/" + "{file}_SE_Aligned.sortedByCoord.out.bam",
     output:
         bam_idx = temp(config['datadirs']['bam'] + "/{file}/" + "{file}_SE_Aligned.sortedByCoord.out.bam.bai"),
         small_bam_SE = config['datadirs']['bam'] + "/{file}/" + "{file}_SE_small_Aligned.sortedByCoord.out.bam",
-        txt = config['datadirs']['bam'] + "/{file}/"+"{file}_SE_reads_count_braf.txt"
+        txt = config['datadirs']['bam'] + "/{file}/"+"{file}_SE_reads_count_transcript.txt"
     params:
         samtools = config['tools']['samtools'],
         region = "chr7:140718327-140926929"
@@ -419,7 +419,7 @@ rule SAM_tools_SE:
         {params.samtools} view -c -f 1 -F 12 {output.small_bam_SE} >> {output.txt}
         """
 ################### R code to generate plots and csv files for polyA   ################################################################################################################################################
-## create the csv file for the polyA on BRAF 3'UTR
+## create the csv file for the polyA on transcript 3'UTR
 rule polyA_r_script:
     input:
     params:
@@ -438,7 +438,7 @@ rule custom_r_script:
     params:
         r_custom = config['scripts']['r_custom']
     output:
-        boxplot_custom = config['datadirs']['r'] + "ratio_BRAF.pdf"
+        boxplot_custom = config['datadirs']['r'] + "ratio_transcript.pdf"
     conda:
         config['conda']['r']
     shell:
