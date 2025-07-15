@@ -19,13 +19,13 @@ salmon_samples <- subdir_dir_salmon[grepl("/salmon", subdir_dir_salmon, ignore.c
 print(salmon_samples)
 ### Extract tpm count for REF and X1 for each tissues line typology
 ## Create a list with all the tpm count for each samples (X1 and ref) inside the results directory  (for each group)
-tpm_x1_list   <- list()
-tpm_ref_list  <- list()
+tpm_transcript_2_list   <- list()
+tpm_transcript_1_list  <- list()
 tpm_transcript_list <- list()
 coldata_list  <- list()
 for (y in 1:length(samples_files)){
-  tpm_x1   <- list()
-  tpm_ref  <- list()
+  tpm_transcript_2   <- list()
+  tpm_transcript_1  <- list()
   tpm_transcript <- list()
   coldata <- data.frame(files = character(), names = character(), stringsAsFactors = FALSE)
   for (i in 1:length(samples_files[[y]])){
@@ -42,11 +42,11 @@ for (y in 1:length(samples_files)){
       transcript <- subset(transcript_data, Name %in% transcript_ids)
       transcript <- subset(transcript, select = c("Name", "TPM"))
       tpm_transcript <- append(tpm_transcript,transcript)
-      tpm_x1  <- append(tpm_x1,X1_tpm$TPM)
-      tpm_ref  <- append(tpm_ref,Ref_tpm$TPM)
+      tpm_transcript_2  <- append(tpm_transcript_2,X1_tpm$TPM)
+      tpm_transcript_1  <- append(tpm_transcript_1,Ref_tpm$TPM)
       assign(paste0(samples_typologies[y],"_tpm_transcript"), tpm_transcript)
-      assign(paste0(samples_typologies[y],"_tpm_x1"), tpm_x1)
-      assign(paste0(samples_typologies[y],"_tpm_ref"), tpm_ref)
+      assign(paste0(samples_typologies[y],"_tpm_transcript_2"), tpm_transcript_2)
+      assign(paste0(samples_typologies[y],"_tpm_transcript_1"), tpm_transcript_1)
       transcript_data <- in.list[11]
       files <- file.path(salmon_samples[y],transcript_data)
       coldata <- rbind(coldata, data.frame(files = files, names = current_sample, stringsAsFactors = FALSE))
@@ -63,7 +63,7 @@ for (y in 1:length(samples_files)){
 transcript_results <- list()
 count = 1
 for(i in samples_typologies){
-  assign(paste0(i,"_transcript_results"), do.call(rbind, Map(data.frame, transcript_ref=get(paste0(i,"_tpm_ref")), transcript_X1=get(paste0(i,"_tpm_x1")))))
+  assign(paste0(i,"_transcript_results"), do.call(rbind, Map(data.frame, transcript_transcript_1=get(paste0(i,"_tpm_transcript_1")), transcript_transcript_2=get(paste0(i,"_tpm_transcript_2")))))
   transcript_results[count] <- list(get(paste0(i,"_transcript_results")))
   names(transcript_results[count]) <- i
   colnames(transcript_results[[count]]) <- c("transcript Reference", "transcript X1")
