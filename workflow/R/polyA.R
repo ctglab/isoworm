@@ -64,5 +64,5 @@ final_polyA_filtered_transcript_2 <- subset(final_polyA_filtered_transcript_2, s
 colnames(final_polyA_filtered_transcript_2) <- c("chr7","start","end","total of samples","samples names")
 
 setwd(final_output)
-write.csv(x=final_polyA_filtered_transcript_1, file="polyA_filtered_unique_regiontranscript_1.csv", row.names = FALSE)
-write.csv(x=final_polyA_filtered_transcript_2,  file="polyA_filtered_unique_regiontranscript_2.csv", row.names = FALSE)
+write.csv(x=final_polyA_filtered_transcript_1, file="polyA_filtered_unique_region_transcript_1.csv", row.names = FALSE)
+write.csv(x=final_polyA_filtered_transcript_2, file="polyA_filtered_unique_region_transcript_2.csv", row.names = FALSE)
