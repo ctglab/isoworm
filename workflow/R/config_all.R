@@ -9,7 +9,7 @@ start_3utr_transcript_1 <- 140734900 + 100
 # 3UTR transcript_2
 end_3utr_transcript_2   <- 140719327  - 100
 start_3utr_transcript_2 <- 140726516  + 100
-## GENE
+## transcript
 end_transcript   <- 140719327 - 100
 start_transcript <- 140924929 + 100
 
