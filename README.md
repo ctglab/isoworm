@@ -37,12 +37,12 @@ Sample3
 
 Then your FASTQ files must follow this naming convention:
 
-Sample1_1.fastq.gz  
-Sample1_2.fastq.gz  
-Sample2_1.fastq.gz  
-Sample2_2.fastq.gz  
-Sample3_1.fastq.gz  
-Sample3_2.fastq.gz  
+Sample1_1.fastq.gz or Sample_1_R1.fastq
+Sample1_2.fastq.gz or Sample_1_R2.fastq
+Sample2_1.fastq.gz or Sample_2_R1.fastq
+Sample2_2.fastq.gz or Sample_2_R2.fastq
+Sample3_1.fastq.gz or Sample_3_R1.fastq 
+Sample3_2.fastq.gz or Sample_3_R2.fastq
 
 You can start directly from the FASTQ files without downloading them or cleaning them, as long as their filenames match the entries in the .txt file as in the example.
 
