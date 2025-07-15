@@ -3,17 +3,17 @@
 length_transcript_2   <- 140725145-140719327
 length_transcript_1  <- 140732564-140730665
 length_transcript <- 9807	
-# 3UTR ref
+# 3UTR transcript 1
 end_3utr_transcript_1   <- 140730665 - 100
 start_3utr_transcript_1 <- 140734900 + 100
-# 3UTR X1
+# 3UTR transcript_2
 end_3utr_transcript_2   <- 140719327  - 100
 start_3utr_transcript_2 <- 140726516  + 100
 ## GENE
 end_transcript   <- 140719327 - 100
 start_transcript <- 140924929 + 100
 
-## put yours
+## put yours transcript ID
 transcript_ids <- c("ENST00000288602.11","ENST00000469930.2","ENST00000479537.6","ENST00000496384.7",
               "ENST00000497784.2","ENST00000642228.1","ENST00000642272.1","ENST00000642808.1",
               "ENST00000642875.1","ENST00000643356.1","ENST00000643790.1","ENST00000644120.1",
