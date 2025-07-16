@@ -66,7 +66,7 @@ datadirs:
 
 # scripts
 scripts:
-  bash: $workflow/util/script.sh
+  bash: $workflow/util/download_fastq_script.sh
   gentrome_sh: $workflow/util/gentrome_salmon.sh
   r_custom: $workflow/R/R_custom.R
   r_salmon: $workflow/R/R_salmon.R
