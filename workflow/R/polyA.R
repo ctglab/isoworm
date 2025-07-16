@@ -27,8 +27,8 @@ final_list_transcript_2  <- list()
 final_list_transcript  <- list()
 for (i in 1:length(dataframes_peak)){
   name <- paste0("peaks_",names(dataframes_peak)[[i]])
-  final_list_transcript_1[[name]]  <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_unique_region_transcript_1) & (end(dataframes_peak[[i]]) <= start_unique_region_transcript_1)))
-  final_list_transcript_2[[name]]   <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_unique_region_transcript_2) & (end(dataframes_peak[[i]]) <= start_unique_region_transcript_2)))
+  final_list_transcript_1[[name]]  <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_utr_transcript_1) & (end(dataframes_peak[[i]]) <= start_utr_transcript_1)))
+  final_list_transcript_2[[name]]   <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_utr_transcript_2) & (end(dataframes_peak[[i]]) <= start_utr_transcript_2)))
   final_list_transcript[[name]] <- assign(name, subset(dataframes_peak[[i]], (start(dataframes_peak[[i]]) >= end_transcript) & (end(dataframes_peak[[i]]) <= start_transcript)))
 }
 
@@ -64,5 +64,5 @@ final_polyA_filtered_transcript_2 <- subset(final_polyA_filtered_transcript_2, s
 colnames(final_polyA_filtered_transcript_2) <- c("chr7","start","end","total of samples","samples names")
 
 setwd(final_output)
-write.csv(x=final_polyA_filtered_transcript_1, file="polyA_filtered_unique_region_transcript_1.csv", row.names = FALSE)
-write.csv(x=final_polyA_filtered_transcript_2, file="polyA_filtered_unique_region_transcript_2.csv", row.names = FALSE)
+write.csv(x=final_polyA_filtered_transcript_1, file="polyA_filtered_utr_transcript_1.csv", row.names = FALSE)
+write.csv(x=final_polyA_filtered_transcript_2, file="polyA_filtered_utr_transcript_2.csv", row.names = FALSE)
