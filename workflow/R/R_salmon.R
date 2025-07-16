@@ -17,8 +17,8 @@ dir_salmon  <- list.dirs(results_dir, recursive = FALSE)
 subdir_dir_salmon <- list.dirs(dir_salmon, recursive = FALSE)
 salmon_samples <- subdir_dir_salmon[grepl("/salmon", subdir_dir_salmon, ignore.case = TRUE)]
 print(salmon_samples)
-### Extract tpm count for REF and X1 for each tissues line typology
-## Create a list with all the tpm count for each samples (X1 and ref) inside the results directory  (for each group)
+### Extract tpm count for transcript_1 and transcript_2 for each tissues line typology
+## Create a list with all the tpm count for each samples (transcript_1 and transcript_2) inside the results directory  (for each group)
 tpm_transcript_2_list   <- list()
 tpm_transcript_1_list  <- list()
 tpm_transcript_list <- list()
@@ -37,13 +37,13 @@ for (y in 1:length(samples_files)){
       print(in.list)
       print(paste("Attempting to read file:", in.list[11]))
       transcript_data <- fread(in.list[11])
-      X1_tpm  <- subset(transcript_data, Name == "ENST00000496384.7")
-      Ref_tpm <- subset(transcript_data, Name == "ENST00000646891.2")
+      transcript_2_tpm  <- subset(transcript_data, Name == name_transcript_1)
+      transcript_1_tpm <- subset(transcript_data, Name == name_transcript_2)
       transcript <- subset(transcript_data, Name %in% transcript_ids)
       transcript <- subset(transcript, select = c("Name", "TPM"))
       tpm_transcript <- append(tpm_transcript,transcript)
-      tpm_transcript_2  <- append(tpm_transcript_2,X1_tpm$TPM)
-      tpm_transcript_1  <- append(tpm_transcript_1,Ref_tpm$TPM)
+      tpm_transcript_2  <- append(tpm_transcript_2,transcript_2_tpm$TPM)
+      tpm_transcript_1  <- append(tpm_transcript_1,transcript_1_tpm$TPM)
       assign(paste0(samples_typologies[y],"_tpm_transcript"), tpm_transcript)
       assign(paste0(samples_typologies[y],"_tpm_transcript_2"), tpm_transcript_2)
       assign(paste0(samples_typologies[y],"_tpm_transcript_1"), tpm_transcript_1)
@@ -66,12 +66,12 @@ for(i in samples_typologies){
   assign(paste0(i,"_transcript_results"), do.call(rbind, Map(data.frame, transcript_transcript_1=get(paste0(i,"_tpm_transcript_1")), transcript_transcript_2=get(paste0(i,"_tpm_transcript_2")))))
   transcript_results[count] <- list(get(paste0(i,"_transcript_results")))
   names(transcript_results[count]) <- i
-  colnames(transcript_results[[count]]) <- c("transcript Reference", "transcript X1")
+  colnames(transcript_results[[count]]) <- c("transcript 1", "transcript 2")
   count = count + 1 
 }
 
 for(i in 1:length(samples_typologies)){
-  transcript_results[[i]]$ratio <- ((transcript_results[[i]]$`transcript X1`+0.01)/(transcript_results[[i]]$`transcript Reference`+0.01))
+  transcript_results[[i]]$ratio <- ((transcript_results[[i]]$`transcript 2`+0.01)/(transcript_results[[i]]$`transcript 1`+0.01))
   transcript_results[[i]] <- transcript_results[[i]] %>% 
     pivot_longer(
       cols = `transcript Reference`:ratio,
@@ -194,7 +194,7 @@ for (i in 1:length(coldata_list)){
 for (i in 1:length(se_list)){
   gse <- summarizeToGene(se_list[[i]], countsFromAbundance="lengthScaledTPM")
   gene_level_TPM <- gse@assays@data@listData[["abundance"]] %>% as.data.frame() %>% tibble::rownames_to_column(var="genes")
-  gene_level_TPM <- subset(gene_level_TPM, genes == "ENSG00000157764.14")
+  gene_level_TPM <- subset(gene_level_TPM, genes == name_gene)
   gene_level_TPM <- as.data.frame(t(as.matrix(gene_level_TPM)))
   gene_level_TPM$groups <- label_plots[[i]]
   gene_level_TPM <- gene_level_TPM[-1, ]
