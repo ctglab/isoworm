@@ -41,9 +41,9 @@ reference:
   fasta:
     GRCh38.primary_assembly.genome: $refdir/chr7.fa
   fasta_salmon:
-    GRCh38.primary_assembly.genome: $refdir/chr7_transcripts.fa
+    GRCh38.primary_assembly.genome: $refdir/chr7_transcripts.fa # full fasta transcrit sequences
   gtf:
-    GRCh38.primary_assembly.genome: $refdir/chr7.gtf
+    GRCh38.primary_assembly.genome: $refdir/chr7.gtf # full gtf for all transcrit in the transcriptome, like the fasta above
   gtf_personal:
     GRCh38.primary_assembly.genome: $workflow/GRCh38.primary_assembly.genome.gtf
 
