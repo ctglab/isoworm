@@ -44,6 +44,7 @@ Sample2_2.fastq.gz or Sample_2_R2.fastq
 Sample3_1.fastq.gz or Sample_3_R1.fastq 
 Sample3_2.fastq.gz or Sample_3_R2.fastq
 
+Change the directory where you need to download te fastq from SRA in the first line of 'download_fastq_script.sh'.
 You can start directly from the FASTQ files without downloading them or cleaning them, as long as their filenames match the entries in the .txt file as in the example.
 
 Configuration
@@ -106,7 +107,7 @@ git clone https://github.com/ctglab/isoworm
 
 ### Usage
 
-Edit `config.yml` to set the input datasets and parameters, edit `config.R` to set the input datasets and parameters for R and edit `script.sh` with the directory where you want to download your fastqs, then issue:
+Edit `config_final.yml` to set the input datasets and parameters, edit `config.R` to set the input datasets and parameters for R if you want the plots and edit `download_fastq_script.sh` with the directory where you want to download your fastqs, then issue:
 ```bash
 snakemake -s snakefile_final.smk --use-conda --rerun-incomplete --core 2 -k
 ```
