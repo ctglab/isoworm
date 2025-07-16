@@ -3,12 +3,12 @@
 length_transcript_2   <- 140725145-140719327
 length_transcript_1  <- 140732564-140730665
 length_transcript <- 9807	
-# unique_region transcript 1
-end_unique_region_transcript_1   <- 140730665 - 100
-start_unique_region_transcript_1 <- 140734900 + 100
-# unique_region transcript_2
-end_unique_region_transcript_2   <- 140719327  - 100
-start_unique_region_transcript_2 <- 140726516  + 100
+# utr transcript 1
+end_utr_transcript_1   <- 140730665 - 100
+start_utr_transcript_1 <- 140734900 + 100
+# utr transcript_2
+end_utr_transcript_2   <- 140719327  - 100
+start_utr_transcript_2 <- 140726516  + 100
 ## transcript
 end_transcript   <- 140719327 - 100
 start_transcript <- 140924929 + 100
