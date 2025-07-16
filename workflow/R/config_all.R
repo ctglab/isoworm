@@ -1,5 +1,5 @@
 ## file:config_all.R
-## values
+## values for polyA module
 length_transcript_2   <- 140725145-140719327
 length_transcript_1  <- 140732564-140730665
 length_transcript <- 9807	
