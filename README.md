@@ -47,10 +47,11 @@ Sample3_2.fastq.gz or Sample_3_R2.fastq
 Change the directory where you need to download te fastq from SRA in the first line of 'download_fastq_script.sh'.
 You can start directly from the FASTQ files without downloading them or cleaning them, as long as their filenames match the entries in the .txt file as in the example.
 
-Configuration
+#### Configuration
 Edit the config.yaml file to set the appropriate parameters for your isoform analysis.
 
-If you wish to generate plots in R, make sure to modify the settings in the R configuration file accordingly.
+#### Warning R plots
+If you want to generate plots in R, make sure to update the appropriate settings in the R configuration file. Please note that in the R scripts used to generate the plots, the custom module is set by default to display only two transcripts in the plot, as well as in the boxplot of the Salmon module (but not in the pie chart). If you wish to plot more than two isoforms, you will also need to modify the corresponding R script. This limitation applies only to the plotting step and does not affect the quantification part of the pipeline, which is managed by Snakemake.
 
 ### Config_final.yml mandatory parameters
 ####  top level directories
@@ -79,7 +80,7 @@ If you wish to generate plots in R, make sure to modify the settings in the R co
 #### salmon modules
 - `salmon_index` - salmon index
 - `quant.sf` - all transcript quantified by salmon
-- `ratio_salmon.pdf` -  box plots ratio between our two isoforms of interest
+- `ratio_salmon.pdf` -  box plots ratio between of two isoforms of interest
 - `pie_charts.pdf` - pie charts expressions values of all our isoforms of interest
 - `total_salmon.pdf` - total expression levels of our gene of interest
 #### custom modules
