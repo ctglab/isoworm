@@ -44,7 +44,7 @@ Sample2_2.fastq.gz or Sample_2_R2.fastq
 Sample3_1.fastq.gz or Sample_3_R1.fastq 
 Sample3_2.fastq.gz or Sample_3_R2.fastq
 
-Change the directory where you need to download te fastq from SRA in the first line of 'download_fastq_script.sh'.
+Change the directory where you need to download the fastq from SRA in the first line of 'download_fastq_script.sh'.
 You can start directly from the FASTQ files without downloading them or cleaning them, as long as their filenames match the entries in the .txt file as in the example.
 
 #### Configuration
@@ -66,9 +66,9 @@ If you want to generate plots in R, make sure to update the appropriate settings
 #### reference files, genome indices and data
 - `stargenomedir, GRCh38.primary_assembly.genome:` - directory for STAR genome and Single cell index files
 - `fasta: GRCh38.primary_assembly.genome:` -  genome fasta reference file for STAR and Single cell
-- `fasta_salmon: GRCh38.primary_assembly.genome:` -  transcript fasta reference for salmon
-- `gtf: GRCh38.primary_assembly.genome:` - gtf file for all transcripts
-- `gtf_personal: GRCh38.primary_assembly.genome:` - gtf file customize for your transcript of interest 
+- `fasta_salmon: GRCh38.primary_assembly.genome:` -  transcript fasta reference for salmon (salmon module)
+- `gtf: GRCh38.primary_assembly.genome:` - gtf file for all transcripts (salmon module)
+- `gtf_personal: GRCh38.primary_assembly.genome:` - gtf file customize for your transcript of interest (custom module)
 
 
 ### Output
